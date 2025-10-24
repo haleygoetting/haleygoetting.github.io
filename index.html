@@ -32,62 +32,88 @@ body {
 }
 
 /* ====== HEADER ====== */
-header{
+header {
   position:relative;
   text-align:center;
-  padding:100px 20px 60px;
+  padding:100px 20px 80px;
   overflow:hidden;
+  z-index:1;
 }
 header::before{
   content:"";
   position:absolute;
   inset:0;
   background:url('https://upload.wikimedia.org/wikipedia/commons/6/6f/Periodic_table_large.svg') center/cover no-repeat;
-  opacity:0.05;
+  opacity:0.07;
   z-index:-1;
+  mix-blend-mode:overlay;
+  animation:tableShift 60s linear infinite;
+  filter:blur(4px);
+}
+@keyframes tableShift{
+  0%{background-position:50% 0%;}
+  50%{background-position:50% 100%;}
+  100%{background-position:50% 0%;}
 }
 
-/* Metallic Hg logo */
-#hg-logo{
+/* ====== LIQUID METAL HG ====== */
+#hg-logo {
   font-family:'Playfair Display',serif;
-  font-size:120px;
+  font-size:130px;
   letter-spacing:-3px;
-  background: linear-gradient(120deg,#bbb,#eee,#999,#fff,#aaa);
-  background-size:300% 300%;
+  background: linear-gradient(120deg,#bfc1c2,#f7f7f7,#a5a5a5,#e2e2e2,#999);
+  background-size:400% 400%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:metalShift 6s linear infinite;
-  filter: drop-shadow(0 0 12px rgba(160,160,160,0.5));
+  animation:metalShift 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(150,150,150,0.6));
+  display:inline-block;
+  position:relative;
+  transition:transform 0.4s ease, filter 0.4s ease;
+  cursor:pointer;
 }
-@keyframes metalShift{
+#hg-logo:hover {
+  transform:scale(1.05) rotate(2deg);
+  filter:drop-shadow(0 0 25px rgba(180,180,180,0.8)) brightness(1.2);
+}
+@keyframes metalShift {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
 
-/* shimmer "melting" effect on scroll */
-@keyframes melt {
-  0% { filter: blur(0px) brightness(1); transform: translateY(0); }
-  100% { filter: blur(2px) brightness(1.3); transform: translateY(10px); }
+/* Distortion ripple effect on hover */
+#hg-logo::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,rgba(255,255,255,0.3) 0%,transparent 70%);
+  opacity:0;
+  transform:scale(0);
+  transition:transform 0.6s ease,opacity 0.6s ease;
+}
+#hg-logo:hover::after {
+  opacity:0.4;
+  transform:scale(2.2);
 }
 
-/* fade-in sections */
-.fade-in{
+/* ====== FADE-IN & SCROLL EFFECTS ====== */
+.fade-in {
   opacity:0;
   transform:translateY(40px);
   transition: all 1s ease;
 }
-.fade-in.visible{
+.fade-in.visible {
   opacity:1;
   transform:translateY(0);
 }
 
 /* ====== TYPOGRAPHY ====== */
-h1,h2,h3{
+h1,h2,h3 {
   font-family:'Playfair Display',serif;
   color:var(--accent);
 }
-h2{
+h2 {
   font-size:2em;
   border-bottom:2px solid var(--accent);
   display:inline-block;
@@ -95,55 +121,48 @@ h2{
 }
 
 /* ====== MAIN SECTIONS ====== */
-main{
+main {
   max-width:1000px;
   margin:0 auto;
   padding:40px 20px;
 }
-section{
+section {
   margin-bottom:60px;
 }
-.project-grid{
+.project-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:25px;
 }
-.project{
+.project {
   background:white;
   border-radius:12px;
   padding:20px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
   transition:transform 0.3s ease,box-shadow 0.3s ease;
+  position:relative;
+  overflow:hidden;
 }
-.project:hover{
+.project:hover {
   transform:translateY(-5px);
   box-shadow:0 6px 16px rgba(0,0,0,0.15);
 }
-.project h3{
-  margin-top:0;
+.project::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(162,103,105,0.1), transparent 60%);
+  opacity:0;
+  transition:opacity 0.3s;
 }
-.project p{color:var(--muted);}
-
-/* ====== ART SHOWCASE ====== */
-.art-showcase{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  justify-content:center;
+.project:hover::before {
+  opacity:1;
 }
-.art-piece{
-  width:260px;
-  height:260px;
-  border-radius:10px;
-  background-size:cover;
-  background-position:center;
-  box-shadow:0 3px 10px rgba(0,0,0,0.15);
-  transition:transform 0.3s ease;
-}
-.art-piece:hover{transform:scale(1.05) rotate(1deg);}
+.project h3 {margin-top:0;}
+.project p {color:var(--muted);}
 
 /* ====== FOOTER ====== */
-footer{
+footer {
   text-align:center;
   padding:30px;
   font-size:0.9em;
@@ -187,12 +206,7 @@ footer{
 
   <section class="fade-in">
     <h2>Art & Design</h2>
-    <p>Art is the language through which I translate scientific beauty into visual form. Below are a few selected works from my portfolio.</p>
-    <div class="art-showcase">
-      <div class="art-piece" style="background-image:url('your-art-image1.jpg');"></div>
-      <div class="art-piece" style="background-image:url('your-art-image2.jpg');"></div>
-      <div class="art-piece" style="background-image:url('your-art-image3.jpg');"></div>
-    </div>
+    <p>Art is the language through which I translate scientific beauty into visual form — a bridge between the molecular and the aesthetic.</p>
   </section>
 
   <section class="fade-in">
@@ -219,13 +233,24 @@ const appearOnScroll=new IntersectionObserver((entries,observer)=>{
 },appearOptions);
 faders.forEach(fader=>{appearOnScroll.observe(fader);});
 
-/* "Melting" shimmer as user scrolls */
+/* Liquid Hg shimmer reacts to scroll */
 const hg=document.getElementById('hg-logo');
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
   const intensity=Math.min(y/200,1);
   hg.style.filter=`blur(${intensity*2}px) brightness(${1+intensity*0.3})`;
   hg.style.transform=`translateY(${intensity*10}px)`;
+});
+
+/* Interactive ripple effect in project cards */
+document.querySelectorAll('.project').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+    card.style.setProperty('--x',`${x}px`);
+    card.style.setProperty('--y',`${y}px`);
+  });
 });
 </script>
 
