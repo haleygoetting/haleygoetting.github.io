@@ -3,49 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Haley - Portfolio</title>
+  <title>Haley Goetting — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
+    :root {
+      --bg: #f7f6f2;
+      --accent: #e1b382;
+      --text: #222;
+      --muted: #555;
+      --highlight: #a26769;
     }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
     header {
       text-align: center;
-      margin-bottom: 40px;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #f8e9d2, #f0e4d7);
+      border-bottom: 2px solid #e0d6c5;
     }
+
     h1 {
-      margin-bottom: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      margin: 0;
+      color: var(--highlight);
+      letter-spacing: 1px;
     }
-    p {
-      color: #555;
+
+    header p {
+      font-size: 1.1em;
+      color: var(--muted);
     }
-    .projects {
-      margin-top: 40px;
+
+    header a {
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: 600;
     }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      border-bottom: 2px solid var(--highlight);
+      display: inline-block;
+      margin-bottom: 25px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
     .project {
-      margin-bottom: 20px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .project h3 {
+      margin-top: 0;
+      color: var(--highlight);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .project p {
+      color: var(--muted);
+    }
+
+    .art-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .art-piece {
+      width: 260px;
+      height: 260px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .art-piece:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9em;
+      color: var(--muted);
+      border-top: 1px solid #ddd;
+      background-color: #faf9f7;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Haley Goetting</h1>
-    <p>Welcome to my portfolio website!</p>
-    <p> h_goetting@coloradocollege.edu <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></p>
+    <p>Biochemistry Student • Researcher • Visual Artist</p>
+    <p>
+      <a href="mailto:h_goetting@coloradocollege.edu">h_goetting@coloradocollege.edu</a> |
+      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/yourgithub" target="_blank">GitHub</a>
+    </p>
   </header>
 
-  <section class="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project Title</h3>
-      <p>Description of your project and what it does. You can link to the code or demo.</p>
-    </div>
-    <div class="project">
-      <h3>Another Project</h3>
-      <p>Talk briefly about what it is, how you made it, or what you learned.</p>
-    </div>
-  </section>
+  <main>
+
+    <section>
+      <h2>Research & Lab Work</h2>
+      <div class="project-grid">
+        <div class="project">
+          <h3>Cold Atmospheric Plasma DNA Studies</h3>
+          <p>Investigating oxidative stress pathways and RONS-mediated DNA damage using fluorescence and LC-MS techniques.</p>
+        </div>
+        <div class="project">
+          <h3>RNA Folding & Metal Coordination</h3>
+          <p>Explored small RNA stability under metal-ion influence using thermal denaturation and calorimetry methods.</p>
+        </div>
+        <div class="project">
+          <h3>Biochemical Methods Teaching Assistant</h3>
+          <p>Assisted undergraduates in experimental design, gel electrophoresis, and quantitative data analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Presentations & Awards</h2>
+      <div class="project-grid">
+        <div class="project">
+          <h3>Summer Research Symposium 2025</h3>
+          <p>Poster presentation on plasma-induced hydroxyl radical quantification and mechanistic modeling.</p>
+        </div>
+        <div class="project">
+          <h3>Outstanding Student in Biochemistry Award</h3>
+          <p>Recognized for academic excellence and creative interdisciplinary research integrating chemistry and art.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Art & Design</h2>
+      <p>Art is the language through which I translate scientific beauty into visual form. Below are a few selected works from my portfolio.</p>
+      <div class="art-showcase">
+        <div class="art-piece" style="background-image: url('your-art-image1.jpg');"></div>
+        <div class="art-piece" style="background-image: url('your-art-image2.jpg');"></div>
+        <div class="art-piece" style="background-image: url('your-art-image3.jpg');"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Creative Projects</h2>
+      <div class="project-grid">
+        <div class="project">
+          <h3>“Atomic Aesthetics”</h3>
+          <p>A digital-analog art series combining microscopic imagery with ink-based abstraction to explore organic form.</p>
+        </div>
+        <div class="project">
+          <h3>Science Illustration</h3>
+          <p>Produced illustrations for lab publications and educational outreach, emphasizing clarity and visual narrative.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Haley Goetting • Designed & Coded with ✦ creativity ✦
+  </footer>
+
 </body>
 </html>
+
