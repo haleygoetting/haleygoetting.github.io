@@ -4,9 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Haley Goetting — Portfolio</title>
+
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Three.js -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/FontLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/FontLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/geometries/TextGeometry.js"></script>
 
 <style>
@@ -18,7 +22,7 @@
   --accent:#a26769;
 }
 
-/* ====== GLOBAL ====== */
+/* ====== BODY & BACKGROUND ====== */
 body {
   margin:0;
   font-family:'Inter',sans-serif;
@@ -37,33 +41,42 @@ body {
 /* ====== HEADER ====== */
 header {
   text-align:center;
-  padding:50px 20px 60px;
+  padding:80px 20px 60px;
   position: relative;
 }
+header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/6/6f/Periodic_table_large.svg') center/cover no-repeat;
+  opacity:0.05;
+  z-index:-1;
+}
+
+/* Hg 3D logo container */
 #hg-logo-container {
-  width: 600px;
-  height: 300px;
-  margin: 0 auto 20px auto;
-  background: transparent;
+  width:600px;
+  height:300px;
+  margin:0 auto 20px auto;
 }
 
 /* Fade-in sections */
-.fade-in {
+.fade-in{
   opacity:0;
   transform:translateY(40px);
   transition: all 1s ease;
 }
-.fade-in.visible {
+.fade-in.visible{
   opacity:1;
   transform:translateY(0);
 }
 
 /* Typography */
-h1,h2,h3 {
+h1,h2,h3{
   font-family:'Playfair Display',serif;
   color:var(--accent);
 }
-h2 {
+h2{
   font-size:2em;
   border-bottom:2px solid var(--accent);
   display:inline-block;
@@ -71,41 +84,43 @@ h2 {
 }
 
 /* Main sections */
-main {
+main{
   max-width:1000px;
   margin:0 auto;
   padding:40px 20px;
 }
-section {
+section{
   margin-bottom:60px;
 }
-.project-grid {
+.project-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:25px;
 }
-.project {
+.project{
   background:white;
   border-radius:12px;
   padding:20px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
   transition:transform 0.3s ease,box-shadow 0.3s ease;
 }
-.project:hover {
+.project:hover{
   transform:translateY(-5px);
   box-shadow:0 6px 16px rgba(0,0,0,0.15);
 }
-.project h3 { margin-top:0; }
-.project p { color:var(--muted); }
+.project h3{
+  margin-top:0;
+}
+.project p{color:var(--muted);}
 
 /* Art showcase */
-.art-showcase {
+.art-showcase{
   display:flex;
   flex-wrap:wrap;
   gap:20px;
   justify-content:center;
 }
-.art-piece {
+.art-piece{
   width:260px;
   height:260px;
   border-radius:10px;
@@ -114,10 +129,10 @@ section {
   box-shadow:0 3px 10px rgba(0,0,0,0.15);
   transition:transform 0.3s ease;
 }
-.art-piece:hover { transform:scale(1.05) rotate(1deg); }
+.art-piece:hover{transform:scale(1.05) rotate(1deg);}
 
 /* Footer */
-footer {
+footer{
   text-align:center;
   padding:30px;
   font-size:0.9em;
@@ -181,7 +196,7 @@ footer {
 <footer>© 2025 Haley Goetting • Designed & Coded with ✦ creativity ✦</footer>
 
 <script>
-// Fade-in on scroll
+// Fade-in sections on scroll
 const faders = document.querySelectorAll('.fade-in');
 const appearOptions = { threshold: 0.1 };
 const appearOnScroll = new IntersectionObserver((entries, observer)=>{
@@ -193,7 +208,7 @@ const appearOnScroll = new IntersectionObserver((entries, observer)=>{
 }, appearOptions);
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// ================== Three.js Hg logo ==================
+// ================== Three.js 3D Hg logo ==================
 const container = document.getElementById('hg-logo-container');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 1000);
@@ -203,47 +218,58 @@ const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
 renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+// Lighting
+const ambient = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambient);
-const dirLight = new THREE.DirectionalLight(0xffffff,1);
+const dirLight = new THREE.DirectionalLight(0xffffff, 1);
 dirLight.position.set(5,5,5);
 scene.add(dirLight);
 
-// Load the local font JSON file
+// Load helvetiker font
 const loader = new THREE.FontLoader();
-loader.load('fonts/helvetiker_regular.typeface.json', function(font) {
-    const textGeo = new THREE.TextGeometry('Hg', {
-        font: font,
-        size: 2,
-        height: 0.5,
-        bevelEnabled: true,
-        bevelThickness: 0.05,
-        bevelSize: 0.05,
-        bevelSegments: 5
-    });
-    textGeo.center();
-    const material = new THREE.MeshStandardMaterial({ color: 0xc0c0c0, metalness:1, roughness:0.3 });
-    const mesh = new THREE.Mesh(textGeo, material);
-    scene.add(mesh);
+loader.load('helvetiker_regular.typeface.json', function(font){
+  const geo = new THREE.TextGeometry('Hg', {
+    font: font,
+    size: 2,
+    height: 0.5,
+    bevelEnabled:true,
+    bevelThickness:0.05,
+    bevelSize:0.05,
+    bevelSegments:5
+  });
+  geo.center();
 
-    function animate() {
-        requestAnimationFrame(animate);
-        mesh.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-    animate();
+  // Metallic, reflective material
+  const mat = new THREE.MeshStandardMaterial({ color:0xcccccc, metalness:1, roughness:0.3, envMapIntensity:1 });
+  const mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
 
-    // Mouse reactive movement
-    container.addEventListener('mousemove', (e)=>{
-        const rect = container.getBoundingClientRect();
-        const x = (e.clientX - rect.left)/rect.width - 0.5;
-        const y = (e.clientY - rect.top)/rect.height - 0.5;
-        mesh.rotation.x = y * 0.5;
-        mesh.rotation.y = x * 0.5;
-    });
+  // Animate and add slight molten effect
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const time = clock.getElapsedTime();
+    
+    // Rotation + subtle wobble for molten look
+    mesh.rotation.y += 0.01;
+    mesh.rotation.x = Math.sin(time*0.5)*0.05;
+    mesh.rotation.z = Math.cos(time*0.3)*0.03;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Mouse interaction (bubble/move effect)
+  container.addEventListener('mousemove', (e)=>{
+    const rect = container.getBoundingClientRect();
+    const x = (e.clientX - rect.left)/rect.width - 0.5;
+    const y = (e.clientY - rect.top)/rect.height - 0.5;
+    mesh.rotation.x = y;
+    mesh.rotation.y = x;
+  });
 });
 
-// Handle window resize
+// Responsive
 window.addEventListener('resize', ()=>{
   camera.aspect = container.clientWidth/container.clientHeight;
   camera.updateProjectionMatrix();
