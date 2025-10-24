@@ -6,7 +6,7 @@
 <title>Haley Goetting — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/FontLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/FontLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/geometries/TextGeometry.js"></script>
 
 <style>
@@ -18,6 +18,7 @@
   --accent:#a26769;
 }
 
+/* ====== GLOBAL ====== */
 body {
   margin:0;
   font-family:'Inter',sans-serif;
@@ -33,34 +34,36 @@ body {
   100%{background-position:0% 50%;}
 }
 
+/* ====== HEADER ====== */
 header {
   text-align:center;
-  padding:50px 20px;
+  padding:50px 20px 60px;
+  position: relative;
 }
-
 #hg-logo-container {
-  width:600px;
-  height:300px;
-  margin:0 auto 20px auto;
+  width: 600px;
+  height: 300px;
+  margin: 0 auto 20px auto;
+  background: transparent;
 }
 
 /* Fade-in sections */
-.fade-in{
+.fade-in {
   opacity:0;
   transform:translateY(40px);
   transition: all 1s ease;
 }
-.fade-in.visible{
+.fade-in.visible {
   opacity:1;
   transform:translateY(0);
 }
 
 /* Typography */
-h1,h2,h3{
+h1,h2,h3 {
   font-family:'Playfair Display',serif;
   color:var(--accent);
 }
-h2{
+h2 {
   font-size:2em;
   border-bottom:2px solid var(--accent);
   display:inline-block;
@@ -68,43 +71,41 @@ h2{
 }
 
 /* Main sections */
-main{
+main {
   max-width:1000px;
   margin:0 auto;
   padding:40px 20px;
 }
-section{
+section {
   margin-bottom:60px;
 }
-.project-grid{
+.project-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:25px;
 }
-.project{
+.project {
   background:white;
   border-radius:12px;
   padding:20px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
   transition:transform 0.3s ease,box-shadow 0.3s ease;
 }
-.project:hover{
+.project:hover {
   transform:translateY(-5px);
   box-shadow:0 6px 16px rgba(0,0,0,0.15);
 }
-.project h3{
-  margin-top:0;
-}
-.project p{color:var(--muted);}
+.project h3 { margin-top:0; }
+.project p { color:var(--muted); }
 
 /* Art showcase */
-.art-showcase{
+.art-showcase {
   display:flex;
   flex-wrap:wrap;
   gap:20px;
   justify-content:center;
 }
-.art-piece{
+.art-piece {
   width:260px;
   height:260px;
   border-radius:10px;
@@ -113,10 +114,10 @@ section{
   box-shadow:0 3px 10px rgba(0,0,0,0.15);
   transition:transform 0.3s ease;
 }
-.art-piece:hover{transform:scale(1.05) rotate(1deg);}
+.art-piece:hover { transform:scale(1.05) rotate(1deg); }
 
 /* Footer */
-footer{
+footer {
   text-align:center;
   padding:30px;
   font-size:0.9em;
@@ -202,45 +203,47 @@ const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
 renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+const ambient = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambient);
 const dirLight = new THREE.DirectionalLight(0xffffff,1);
 dirLight.position.set(5,5,5);
 scene.add(dirLight);
 
+// Load the local font JSON file
 const loader = new THREE.FontLoader();
-loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font){
-  const geo = new THREE.TextGeometry('Hg', {
-    font: font,
-    size: 2,
-    height: 0.5,
-    bevelEnabled:true,
-    bevelThickness:0.05,
-    bevelSize:0.05,
-    bevelSegments:5
-  });
-  geo.center();
+loader.load('fonts/helvetiker_regular.typeface.json', function(font) {
+    const textGeo = new THREE.TextGeometry('Hg', {
+        font: font,
+        size: 2,
+        height: 0.5,
+        bevelEnabled: true,
+        bevelThickness: 0.05,
+        bevelSize: 0.05,
+        bevelSegments: 5
+    });
+    textGeo.center();
+    const material = new THREE.MeshStandardMaterial({ color: 0xc0c0c0, metalness:1, roughness:0.3 });
+    const mesh = new THREE.Mesh(textGeo, material);
+    scene.add(mesh);
 
-  const mat = new THREE.MeshStandardMaterial({ color:0xcccccc, metalness:1, roughness:0.3 });
-  const mesh = new THREE.Mesh(geo, mat);
-  scene.add(mesh);
+    function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+    animate();
 
-  function animate() {
-    requestAnimationFrame(animate);
-    mesh.rotation.y += 0.01;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  container.addEventListener('mousemove', (e)=>{
-    const rect = container.getBoundingClientRect();
-    const x = (e.clientX - rect.left)/rect.width - 0.5;
-    const y = (e.clientY - rect.top)/rect.height - 0.5;
-    mesh.rotation.x = y * 0.5;
-    mesh.rotation.y = x * 0.5;
-  });
+    // Mouse reactive movement
+    container.addEventListener('mousemove', (e)=>{
+        const rect = container.getBoundingClientRect();
+        const x = (e.clientX - rect.left)/rect.width - 0.5;
+        const y = (e.clientY - rect.top)/rect.height - 0.5;
+        mesh.rotation.x = y * 0.5;
+        mesh.rotation.y = x * 0.5;
+    });
 });
 
+// Handle window resize
 window.addEventListener('resize', ()=>{
   camera.aspect = container.clientWidth/container.clientHeight;
   camera.updateProjectionMatrix();
