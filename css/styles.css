@@ -33,7 +33,7 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 }
 
 .hero-left img {
-  width: 66%; /* about 2/3 of horizontal space */
+  width: 70%;/* about 2/3 of horizontal space */
   height: auto;
   display: block;
   border-radius: var(--radius);
@@ -64,9 +64,9 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 }
 
 .hero-headshot {
-  width: 100px;
+  width: 50px;
   height: auto;
-  border-radius: 50%;
+  border-radius: 20%;
   display: block;
   margin-top: 8px;
 }
