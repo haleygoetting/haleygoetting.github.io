@@ -38,8 +38,6 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
   .header-inner{
     flex-direction:column;
     gap:12px;}
-  .hero{
-    height:65vh;}
   .hero-text{
     bottom:6%;
     padding:0 16px;}
