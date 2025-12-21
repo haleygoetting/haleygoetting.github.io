@@ -40,7 +40,7 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 .hero-overlay {
   position: absolute;
   top: 20%;
-  left: 70%; /* start roughly where the image ends, adjust */
+  left: 80%; /* start roughly where the image ends, adjust */
   transform: translateX(-50%);
   max-width: 320px; /* width of overlay box */
   background: rgba(255, 255, 255, 0.85); /* semi-transparent */
@@ -51,30 +51,26 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 .hero-overlay h2 {
   font-weight: 400;
   letter-spacing: 0.04em;
-  margin-bottom: 12px;
-}
+  margin-bottom: 12px;}
 
 .hero-overlay p {
   font-size: 1.05rem;
   color: var(--muted);
-  margin-bottom: 16px;
-}
+  margin-bottom: 16px;}
 
 .hero-headshot {
   width: 50px;
   height: auto;
   border-radius: 20%;
   display: block;
-  margin-top: 8px;
-}
+  margin-top: 8px;}
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 720px) {
   .hero-left img {
     width: 90%;
     margin: 0 auto;
-    display: block;
-  }
+    display: block;}
 
   .hero-overlay {
     position: static;
@@ -83,13 +79,10 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
     background: none;
     padding: 0;
     text-align: center;
-    margin-top: 16px;
-  }
+    margin-top: 16px;}
 
   .hero-headshot {
-    margin: 8px auto 0;
-  }
-}
+    margin: 8px auto 0;}}
 
 
 
