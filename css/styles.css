@@ -18,11 +18,6 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 .site-nav a{margin-left:12px;text-decoration:none;color:var(--muted);font-weight:500}
 .site-nav a:hover{color:var(--accent)}
 
-/* hero */
-.hero{display:flex;gap:24px;align-items:center;padding:40px 0}
-.hero-text h2{font-size:1.5rem;margin-bottom:8px}
-.hero p{color:var(--muted)}
-.hero-image img{width:260px;height:auto;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,0.08)}
 
 /* about */
 .about{padding:18px 0;border-top:1px dashed #f0f0f0}
@@ -40,10 +35,17 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 
 /* responsive: stack hero columns on narrow screens */
 @media (max-width:720px){
-  .hero{flex-direction:column-reverse;text-align:center}
-  .hero-image img{width:90%}
-  .header-inner{flex-direction:column;gap:12px}
-}
+  .header-inner{
+    flex-direction:column;
+    gap:12px;}
+  .hero{
+    height:65vh;}
+  .hero-text{
+    bottom:6%;
+    padding:0 16px;}
+  .hero-text h2{
+    font-size:1.2rem;}}
+
 
 
 /* HERO SECTION — image-first layout */
