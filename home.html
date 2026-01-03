@@ -377,6 +377,11 @@
                 requestAnimationFrame(animate);
 
                 time += 0.008; // Slower, more fluid animation
+                frameCount++;
+
+                // Update debug indicator
+                const fps = Math.round(frameCount / ((Date.now() - startTime) / 1000));
+                debugIndicator.textContent = `Frame: ${frameCount} | FPS: ${fps} | Time: ${time.toFixed(1)}`;
 
                 // Complex particle movement
                 particles.rotation.x = Math.sin(time * 0.4) * 0.15;
@@ -405,8 +410,53 @@
                 camera.position.y = Math.cos(time * 0.12) * 12;
                 camera.lookAt(0, 0, 0);
 
-                renderer.render(scene, camera);
+                try {
+                    renderer.render(scene, camera);
+                } catch (renderError) {
+                    debugIndicator.textContent += ` | RENDER ERROR: ${renderError.message}`;
+                    debugIndicator.style.color = '#ff6666';
+
+                    // Fallback: draw particles directly on canvas as simple dots
+                    if (!renderer.fallbackActive) {
+                        renderer.fallbackActive = true;
+                        debugIndicator.textContent += ' | Using fallback renderer';
+
+                        // Override render method with 2D canvas fallback
+                        const canvas = renderer.domElement;
+                        const ctx = canvas.getContext('2d');
+                        renderer.render = function() {
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                            ctx.fillStyle = '#ffffff';
+                            for (let i = 0; i < Math.min(particleCount, 500); i++) {
+                                const i3 = i * 3;
+                                const x = (positions[i3] + canvas.width/2) % canvas.width;
+                                const y = (positions[i3 + 1] + canvas.height/2) % canvas.height;
+                                const z = positions[i3 + 2];
+
+                                const size = Math.max(1, 3 - Math.abs(z) * 0.1);
+                                ctx.beginPath();
+                                ctx.arc(x, y, size, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        };
+                    }
+                }
             }
+
+            // Add visual debug indicator
+            const debugIndicator = document.createElement('div');
+            debugIndicator.style.position = 'absolute';
+            debugIndicator.style.top = '50px';
+            debugIndicator.style.left = '10px';
+            debugIndicator.style.color = 'white';
+            debugIndicator.style.fontSize = '12px';
+            debugIndicator.style.fontFamily = 'monospace';
+            document.body.appendChild(debugIndicator);
+
+            let frameCount = 0;
+            const startTime = Date.now();
 
             animate();
             status.textContent = 'SUCCESS: Enhanced cymatics particles running!';
