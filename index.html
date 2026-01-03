@@ -144,16 +144,104 @@
   </style>
 </head>
 <body>
-  <!-- ULTIMATE SIMPLE TEST -->
-  <h1 style="color: red; background: yellow; font-size: 48px; padding: 20px; margin: 50px;">
-    🚨🚨🚨 IF YOU SEE THIS RED TEXT ON YELLOW, SOMETHING IS VERY WRONG 🚨🚨🚨
-  </h1>
-  <p style="color: blue; font-size: 24px; margin: 20px;">
-    This is basic HTML text that should definitely be visible.
-  </p>
+  <div id="particle-container"></div>
 
-  <!-- Temporarily removed particle system for testing -->
-  <!-- <div id="particle-container"></div> -->
+  <!-- Navigation Overlay -->
+  <div class="content-overlay">
+    <div class="name-title">
+      <h1>Haley<br>Goetting</h1>
+    </div>
+    <nav class="site-nav landing-nav">
+      <a href="works.html">Works</a>
+      <a href="art-conservation.html">Art Conservation</a>
+      <a href="research.html">Research</a>
+      <a href="b-side.html">B-Side</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Clean 3D particle system - no status messages
+    if (typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+      camera.position.set(-80, 0, 200);
+      camera.lookAt(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('particle-container').appendChild(renderer.domElement);
+
+      // Create particles in a more organic, dispersed cloud shape
+      const geometry = new THREE.BufferGeometry();
+      const vertices = [];
+
+      for (let i = 0; i < 1000; i++) {
+        // Create a more organic distribution with some structure
+        const angle1 = Math.random() * Math.PI * 2;
+        const angle2 = Math.random() * Math.PI * 2;
+        const radius1 = Math.random() * 80 + 20; // Base radius with variation
+        const radius2 = Math.random() * 60 + 15;
+
+        // Add some noise to break up perfect geometry
+        const noise1 = (Math.random() - 0.5) * 40;
+        const noise2 = (Math.random() - 0.5) * 30;
+        const noise3 = (Math.random() - 0.5) * 35;
+
+        vertices.push(
+          Math.cos(angle1) * radius1 + noise1,
+          Math.sin(angle2) * radius2 + noise2,
+          Math.cos(angle1 + angle2) * (radius1 + radius2) * 0.3 + noise3
+        );
+      }
+
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+      const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
+      const particles = new THREE.Points(geometry, material);
+
+      // Offset to rotate around corner instead of center
+      particles.position.set(-30, -20, -15);
+
+      scene.add(particles);
+
+      // Mouse interaction setup
+      const mouse = new THREE.Vector2(0, 0);
+      const mouseWorld = new THREE.Vector3(0, 0, 0);
+
+      // Mouse move handler
+      document.addEventListener('mousemove', (event) => {
+        // Convert screen coordinates to normalized device coordinates (-1 to +1)
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Convert to world coordinates
+        mouseWorld.set(mouse.x, mouse.y, 0.5);
+        mouseWorld.unproject(camera);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Mouse interaction - particles are attracted to mouse
+        const mouseInfluence = 0.02;
+        particles.rotation.x += (mouse.y * mouseInfluence + 0.001);
+        particles.rotation.y += (mouse.x * mouseInfluence + 0.002);
+        particles.rotation.z += 0.0005;
+
+        // Add subtle mouse-following movement
+        particles.position.x += (mouseWorld.x - particles.position.x) * 0.01;
+        particles.position.y += (mouseWorld.y - particles.position.y) * 0.01;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
+  </script>
 
   <script>
     // Clean 3D particle system - no status messages
