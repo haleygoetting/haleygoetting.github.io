@@ -30,7 +30,7 @@
       scene.background = new THREE.Color(0x000000);
 
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-      camera.position.z = 300;
+      camera.position.z = 200;
 
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -69,15 +69,33 @@
 
       scene.add(particles);
 
-      camera.position.z = 300;
+      // Mouse interaction setup
+      const mouse = new THREE.Vector2(0, 0);
+      const mouseWorld = new THREE.Vector3(0, 0, 0);
+
+      // Mouse move handler
+      document.addEventListener('mousemove', (event) => {
+        // Convert screen coordinates to normalized device coordinates (-1 to +1)
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Convert to world coordinates
+        mouseWorld.set(mouse.x, mouse.y, 0.5);
+        mouseWorld.unproject(camera);
+      });
 
       function animate() {
         requestAnimationFrame(animate);
 
-        // Rotate around corner axis
-        particles.rotation.x += 0.001;
-        particles.rotation.y += 0.002;
+        // Mouse interaction - particles are attracted to mouse
+        const mouseInfluence = 0.02;
+        particles.rotation.x += (mouse.y * mouseInfluence + 0.001);
+        particles.rotation.y += (mouse.x * mouseInfluence + 0.002);
         particles.rotation.z += 0.0005;
+
+        // Add subtle mouse-following movement
+        particles.position.x += (mouseWorld.x - particles.position.x) * 0.01;
+        particles.position.y += (mouseWorld.y - particles.position.y) * 0.01;
 
         renderer.render(scene, camera);
       }
