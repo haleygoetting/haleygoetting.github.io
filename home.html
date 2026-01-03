@@ -481,9 +481,74 @@
             status.className = 'success';
 
         } catch (error) {
-            status.textContent = 'ERROR: ' + error.message;
+            status.textContent = 'ERROR: ' + error.message + ' | Using simple canvas fallback';
             status.className = 'error';
             console.error('Particle system error:', error);
+
+            // Super simple canvas fallback that definitely works
+            createSimpleCanvasParticles();
+        }
+
+        function createSimpleCanvasParticles() {
+            const canvas = document.createElement('canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.zIndex = '1';
+
+            const container = document.getElementById('container');
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+
+            // Create simple particles
+            for (let i = 0; i < 200; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1,
+                    hue: Math.random() * 360
+                });
+            }
+
+            let simpleTime = 0;
+            function simpleAnimate() {
+                requestAnimationFrame(simpleAnimate);
+
+                // Clear canvas with slight trail effect
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Update and draw particles
+                particles.forEach(particle => {
+                    // Simple wave motion
+                    particle.x += particle.vx + Math.sin(simpleTime * 0.01 + particle.x * 0.01) * 0.5;
+                    particle.y += particle.vy + Math.cos(simpleTime * 0.015 + particle.y * 0.01) * 0.5;
+
+                    // Wrap around edges
+                    if (particle.x < 0) particle.x = canvas.width;
+                    if (particle.x > canvas.width) particle.x = 0;
+                    if (particle.y < 0) particle.y = canvas.height;
+                    if (particle.y > canvas.height) particle.y = 0;
+
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsl(${particle.hue + simpleTime * 0.5}, 70%, 60%)`;
+                    ctx.fill();
+                });
+
+                simpleTime++;
+            }
+
+            simpleAnimate();
+            status.textContent = 'SUCCESS: Simple canvas particles running!';
+            status.className = 'success';
         }
     </script>
 </body>
