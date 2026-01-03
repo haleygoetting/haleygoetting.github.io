@@ -383,6 +383,11 @@
                 const fps = Math.round(frameCount / ((Date.now() - startTime) / 1000));
                 debugIndicator.textContent = `Frame: ${frameCount} | FPS: ${fps} | Time: ${time.toFixed(1)}`;
 
+                // Animate the visual test element
+                const hue = (time * 50) % 360;
+                visualTest.style.background = `hsl(${hue}, 100%, 50%)`;
+                visualTest.style.transform = `translate(${Math.sin(time) * 20}px, ${Math.cos(time * 0.7) * 20}px) scale(${1 + Math.sin(time * 2) * 0.2})`;
+
                 // Complex particle movement
                 particles.rotation.x = Math.sin(time * 0.4) * 0.15;
                 particles.rotation.y += 0.002;
@@ -445,7 +450,7 @@
                 }
             }
 
-            // Add visual debug indicator
+            // Add multiple visual debug indicators
             const debugIndicator = document.createElement('div');
             debugIndicator.style.position = 'absolute';
             debugIndicator.style.top = '50px';
@@ -453,7 +458,20 @@
             debugIndicator.style.color = 'white';
             debugIndicator.style.fontSize = '12px';
             debugIndicator.style.fontFamily = 'monospace';
+            debugIndicator.style.background = 'rgba(0,0,0,0.7)';
+            debugIndicator.style.padding = '5px';
             document.body.appendChild(debugIndicator);
+
+            // Add a simple animated visual element to prove JavaScript is working
+            const visualTest = document.createElement('div');
+            visualTest.style.position = 'absolute';
+            visualTest.style.top = '80px';
+            visualTest.style.left = '10px';
+            visualTest.style.width = '50px';
+            visualTest.style.height = '50px';
+            visualTest.style.background = 'red';
+            visualTest.style.borderRadius = '50%';
+            document.body.appendChild(visualTest);
 
             let frameCount = 0;
             const startTime = Date.now();
