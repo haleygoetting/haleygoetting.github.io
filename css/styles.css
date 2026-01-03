@@ -1,25 +1,26 @@
 /* basic reset and variables */
 :root{
   --max-width:1100px;
-  --accent: #6b5b95;
-  --muted:#666;
+  --accent: #8a7cff; /* Lighter purple for dark theme */
+  --muted:#cccccc; /* Lighter gray for dark theme */
+  --dark-bg: #0a0a0a; /* Very dark background */
   --radius:10px;
   --gap:18px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-     color:#222;line-height:1.5;background:#fff;}
+     color:#ffffff;line-height:1.5;background:var(--dark-bg);}
 .container{max-width:var(--max-width);margin:0 auto;padding:32px}
 
 /* header */
-.site-header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
+.site-header{background:rgba(10,10,10,0.8);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1);position:sticky;top:0;z-index:10}
 .header-inner{display:flex;align-items:center;justify-content:space-between}
-.site-title{font-size:1.25rem;letter-spacing:0.6px}
+.site-title{font-size:1.25rem;letter-spacing:0.6px;color:#ffffff;}
 .site-nav a{margin-left:12px;text-decoration:none;color:var(--muted);font-weight:500}
 .site-nav a:hover{color:var(--accent)}
 
 /* footer */
-.site-footer{border-top:1px solid #eee;padding:20px 0;margin-top:40px;text-align:center;color:var(--muted);font-size:0.95rem}
+.site-footer{border-top:1px solid rgba(255,255,255,0.1);padding:20px 0;margin-top:40px;text-align:center;color:var(--muted);font-size:0.95rem;background:rgba(10,10,10,0.8);backdrop-filter:blur(10px);}
 
 /* HERO — image with overlay */
 .hero {
@@ -182,7 +183,14 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 
 .gallery-item {
   text-decoration: none;
-  color: inherit;}
+  color: inherit;
+  background: rgba(10,10,10,0.6);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
 .gallery-item img {
   width: 100%;
@@ -190,18 +198,29 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
   display: block;}
 
 .gallery-caption {
-  margin-top: 8px;
-  color: var(--muted);}
+  margin-top: 0;
+  padding: 15px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.05);
+}
 
 .gallery-caption h3 {
   margin-bottom: 4px;
-  font-size: 1rem;}
+  font-size: 1rem;
+  color: #ffffff;
+}
 
 .gallery-caption p {
-  font-size: 0.85rem;}
+  font-size: 0.85rem;
+}
+.gallery-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(138,124,255,0.3);
+}
 .gallery-item:hover img {
   opacity: 0.95;
   transform: scale(1.02);
-  transition: 0.2s ease;
+  transition: 0.3s ease;
 }
 

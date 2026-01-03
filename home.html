@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Haley Goetting — Artist, Scientist, Researcher</title>
+  <link rel="stylesheet" href="css/styles-cymatics.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <!-- Cymatics Particle Background -->
+  <div id="particle-container"></div>
+
+  <!-- Overlay Content -->
+  <div class="content-overlay">
+    <header class="site-header">
+      <div class="container header-inner">
+        <h1 class="site-title">Haley Goetting</h1>
+        <nav class="site-nav">
+          <a href="index.html">Home</a>
+          <a href="works.html">Works</a>
+          <a href="art-conservation.html">Art Conservation</a>
+          <a href="research.html">Research</a>
+          <a href="b-side.html">B-Side</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero container">
+      <div class="hero-content">
+        <h2>Hi — I’m Haley</h2>
+        <p>
+          I’m an undergraduate scientist, researcher, and artist.
+          This space showcases my work in art, conservation, and research.
+        </p>
+        <img src="images/me.jpg" alt="Portrait of Haley" class="hero-headshot">
+      </div>
+    </section>
+
+    <section class="gallery container">
+      <a href="works.html" class="gallery-item">
+        <img src="images/andtheblackholesingstheblues.jpg" alt="Watercolor painting by Haley Goetting">
+        <div class="gallery-caption">
+          <h3>My Work</h3>
+        </div>
+      </a>
+
+      <a href="research.html" class="gallery-item">
+        <img src="images/fujifromlake.JPG" alt="Research and scientific work by Haley Goetting">
+        <div class="gallery-caption">
+          <h3>Research</h3>
+        </div>
+      </a>
+
+      <a href="art-conservation.html" class="gallery-item">
+        <img src="images/granada cathedral.JPG" alt="Art conservation work by Haley Goetting">
+        <div class="gallery-caption">
+          <h3>Art Conservation</h3>
+        </div>
+      </a>
+
+      <a href="b-side.html" class="gallery-item">
+        <img src="images/bubbleface.jpg" alt="B-Side creative projects by Haley Goetting">
+        <div class="gallery-caption">
+          <h3>B-Side</h3>
+        </div>
+      </a>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> Haley Goetting</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/cymatics-particles.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
