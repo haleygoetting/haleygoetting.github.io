@@ -47,13 +47,13 @@
     }
 
     .parallax-img {
-      width: 130%;
+      width: 120%;
       height: auto;
       display: block;
       position: absolute;
       top: 0;
       left: 0;
-      object-position: center bottom; /* Crop from bottom */
+      object-position: center 75%; /* Crop bottom third */
       transition: transform 0.1s ease-out;
     }
 
@@ -85,8 +85,8 @@
       }
 
       .parallax-img {
-        width: 110%;
-        object-position: center bottom;
+        width: 105%;
+        object-position: center 75%;
       }
     }
   </style>
