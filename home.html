@@ -24,6 +24,7 @@
             border-radius: 5px;
             font-size: 12px;
             z-index: 1000;
+            max-width: 400px;
         }
         .error {
             color: #ff6666;
@@ -31,53 +32,257 @@
         .success {
             color: #66ff66;
         }
+        .info {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-    <div id="status">Initializing particle system...</div>
+    <div id="status">Loading particle system...</div>
     <div id="container"></div>
 
-    <!-- Three.js from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-NLx0V1FJu4rAGW5L8c9Q1+JMZ3Q0SYP5sSYZuEEVB0EiXtFXSYg7HbzYw5kzx+KzfGYtNKjEOtZbQGqfWvZVHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <!-- Minimal Three.js implementation -->
     <script>
+        // Minimal Three.js classes needed for particles
+        class Vector3 {
+            constructor(x = 0, y = 0, z = 0) {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            }
+        }
+
+        class Color {
+            constructor(color) {
+                if (typeof color === 'number') {
+                    this.r = ((color >> 16) & 255) / 255;
+                    this.g = ((color >> 8) & 255) / 255;
+                    this.b = (color & 255) / 255;
+                } else if (typeof color === 'string') {
+                    // Simple hex parsing
+                    const hex = color.replace('#', '');
+                    this.r = parseInt(hex.substr(0, 2), 16) / 255;
+                    this.g = parseInt(hex.substr(2, 2), 16) / 255;
+                    this.b = parseInt(hex.substr(4, 2), 16) / 255;
+                }
+            }
+        }
+
+        class BufferAttribute {
+            constructor(array, itemSize) {
+                this.array = array;
+                this.itemSize = itemSize;
+                this.count = array.length / itemSize;
+            }
+        }
+
+        class BufferGeometry {
+            constructor() {
+                this.attributes = {};
+            }
+            setAttribute(name, attribute) {
+                this.attributes[name] = attribute;
+            }
+        }
+
+        class PointsMaterial {
+            constructor(params = {}) {
+                this.color = params.color || new Color(0xffffff);
+                this.size = params.size || 1;
+                this.transparent = params.transparent || false;
+                this.opacity = params.opacity !== undefined ? params.opacity : 1;
+                this.blending = params.blending || 'normal';
+            }
+        }
+
+        class Points {
+            constructor(geometry, material) {
+                this.geometry = geometry;
+                this.material = material;
+                this.position = new Vector3();
+                this.rotation = new Vector3();
+                this.scale = new Vector3(1, 1, 1);
+            }
+        }
+
+        class PerspectiveCamera {
+            constructor(fov, aspect, near, far) {
+                this.fov = fov;
+                this.aspect = aspect;
+                this.near = near;
+                this.far = far;
+                this.position = new Vector3(0, 0, 0);
+                this.lookAt = function(x, y, z) {};
+            }
+        }
+
+        class Scene {
+            constructor() {
+                this.children = [];
+                this.background = new Color(0x000000);
+            }
+            add(object) {
+                this.children.push(object);
+            }
+        }
+
+        // Minimal WebGL renderer
+        class WebGLRenderer {
+            constructor(params = {}) {
+                this.canvas = document.createElement('canvas');
+                this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+                if (!this.gl) {
+                    throw new Error('WebGL not supported');
+                }
+                this.width = 0;
+                this.height = 0;
+                this.antialias = params.antialias || false;
+            }
+
+            setSize(width, height) {
+                this.width = width;
+                this.height = height;
+                this.canvas.width = width;
+                this.canvas.height = height;
+                this.gl.viewport(0, 0, width, height);
+            }
+
+            render(scene, camera) {
+                const gl = this.gl;
+                gl.clearColor(scene.background.r, scene.background.g, scene.background.b, 1);
+                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+                // Simple point rendering
+                scene.children.forEach(child => {
+                    if (child instanceof Points) {
+                        this.renderPoints(child, camera);
+                    }
+                });
+            }
+
+            renderPoints(points, camera) {
+                const gl = this.gl;
+                const geometry = points.geometry;
+                const material = points.material;
+                const positions = geometry.attributes.position;
+
+                if (!positions) return;
+
+                // Create simple shader program
+                const vertexShaderSource = `
+                    attribute vec3 position;
+                    uniform mat4 modelViewMatrix;
+                    uniform mat4 projectionMatrix;
+                    uniform float size;
+
+                    void main() {
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        gl_PointSize = size;
+                    }
+                `;
+
+                const fragmentShaderSource = `
+                    precision mediump float;
+                    uniform vec3 color;
+                    uniform float opacity;
+
+                    void main() {
+                        float r = length(gl_PointCoord - vec2(0.5));
+                        if (r > 0.5) discard;
+                        gl_FragColor = vec4(color, opacity * (1.0 - r * 2.0));
+                    }
+                `;
+
+                const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(vertexShader, vertexShaderSource);
+                gl.compileShader(vertexShader);
+
+                const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(fragmentShader, fragmentShaderSource);
+                gl.compileShader(fragmentShader);
+
+                const program = gl.createProgram();
+                gl.attachShader(program, vertexShader);
+                gl.attachShader(program, fragmentShader);
+                gl.linkProgram(program);
+                gl.useProgram(program);
+
+                // Set up buffers
+                const positionBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, positions.array, gl.STATIC_DRAW);
+
+                const positionLocation = gl.getAttribLocation(program, 'position');
+                gl.enableVertexAttribArray(positionLocation);
+                gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0);
+
+                // Set uniforms
+                const colorLocation = gl.getUniformLocation(program, 'color');
+                gl.uniform3f(colorLocation, material.color.r, material.color.g, material.color.b);
+
+                const opacityLocation = gl.getUniformLocation(program, 'opacity');
+                gl.uniform1f(opacityLocation, material.opacity);
+
+                const sizeLocation = gl.getUniformLocation(program, 'size');
+                gl.uniform1f(sizeLocation, material.size * (window.devicePixelRatio || 1));
+
+                // Simple MVP matrices (simplified)
+                const modelViewMatrix = [
+                    1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 1, 0,
+                    points.position.x, points.position.y, points.position.z, 1
+                ];
+
+                const projectionMatrix = this.createProjectionMatrix(camera);
+
+                const mvLocation = gl.getUniformLocation(program, 'modelViewMatrix');
+                gl.uniformMatrix4fv(mvLocation, false, modelViewMatrix);
+
+                const pLocation = gl.getUniformLocation(program, 'projectionMatrix');
+                gl.uniformMatrix4fv(pLocation, false, projectionMatrix);
+
+                // Draw points
+                gl.drawArrays(gl.POINTS, 0, positions.count);
+            }
+
+            createProjectionMatrix(camera) {
+                const fov = camera.fov * Math.PI / 180;
+                const aspect = camera.aspect;
+                const near = camera.near;
+                const far = camera.far;
+
+                const f = 1.0 / Math.tan(fov / 2);
+                const nf = 1 / (near - far);
+
+                return [
+                    f / aspect, 0, 0, 0,
+                    0, f, 0, 0,
+                    0, 0, (far + near) * nf, -1,
+                    0, 0, 2 * far * near * nf, 0
+                ];
+            }
+        }
+
+        // Create THREE namespace
+        window.THREE = {
+            Scene,
+            PerspectiveCamera,
+            WebGLRenderer,
+            Points,
+            PointsMaterial,
+            BufferGeometry,
+            BufferAttribute,
+            Color,
+            Vector3,
+            AdditiveBlending: 'additive'
+        };
+
+        // Now create the particle system
         const status = document.getElementById('status');
+        status.textContent = 'WebGL: Initializing...';
 
-        // Check if we're running from a server (not file://)
-        const isLocalServer = window.location.protocol !== 'file:';
-
-        function updateStatus(message, isError = false) {
-            status.textContent = message;
-            status.className = isError ? 'error' : (message.includes('Running') ? 'success' : '');
-        }
-
-        updateStatus('Checking environment...');
-
-        // Check if we're on a local server
-        if (!isLocalServer) {
-            updateStatus('ERROR: Must run from local server (http://localhost:9000), not file://', true);
-            return;
-        }
-
-        updateStatus('Checking Three.js...');
-
-        // Check Three.js after a brief delay to ensure it loads
-        setTimeout(() => {
-            if (typeof THREE === 'undefined') {
-                updateStatus('ERROR: Three.js failed to load from CDN', true);
-                return;
-            }
-
-            updateStatus('Three.js loaded, creating particles...');
-
-            try {
-                createParticleSystem();
-            } catch (error) {
-                updateStatus('ERROR: ' + error.message, true);
-            }
-        }, 1000);
-
-        function createParticleSystem() {
+        try {
             // Scene setup
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(0x000000);
@@ -93,14 +298,14 @@
             const container = document.getElementById('container');
             container.appendChild(renderer.domElement);
 
-            updateStatus('Renderer created, generating particles...');
+            status.textContent = 'WebGL: OK, creating particles...';
 
             // Particles
-            const particleCount = 3000;
+            const particleCount = 2000;
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(particleCount * 3);
 
-            // Create particle grid with some cymatics-like patterns
+            // Create particle grid with cymatics patterns
             const gridSize = Math.ceil(Math.sqrt(particleCount));
             let index = 0;
 
@@ -108,56 +313,61 @@
                 for (let y = 0; y < gridSize; y++) {
                     if (index >= particleCount) break;
 
-                    // Create some wave-like displacement
-                    const waveX = Math.sin(x * 0.1) * 10;
-                    const waveY = Math.cos(y * 0.1) * 10;
+                    // Cymatics-like wave patterns
+                    const wave1 = Math.sin(x * 0.1 + y * 0.1) * 15;
+                    const wave2 = Math.cos(x * 0.15 - y * 0.12) * 12;
+                    const interference = wave1 + wave2;
 
-                    positions[index * 3] = (x - gridSize/2) * 3 + waveX;
-                    positions[index * 3 + 1] = (y - gridSize/2) * 3 + waveY;
-                    positions[index * 3 + 2] = (Math.sin(x * 0.05 + y * 0.05) - 0.5) * 30;
+                    positions[index * 3] = (x - gridSize/2) * 4;
+                    positions[index * 3 + 1] = (y - gridSize/2) * 4;
+                    positions[index * 3 + 2] = interference;
 
                     index++;
                 }
-                if (index >= particleCount) break;
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
             const material = new THREE.PointsMaterial({
                 color: 0xffffff,
-                size: 2,
+                size: 2.5,
                 transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending
+                opacity: 0.9
             });
 
             const particles = new THREE.Points(geometry, material);
             scene.add(particles);
 
-            updateStatus('Particles created, starting animation...');
+            status.textContent = 'Particles: ' + particleCount + ' created, animating...';
+            status.className = 'success';
 
-            // Animation loop
+            // Animation
             let time = 0;
             function animate() {
                 requestAnimationFrame(animate);
 
                 time += 0.01;
 
-                // Add some dynamic movement
-                particles.rotation.x = Math.sin(time * 0.5) * 0.1;
-                particles.rotation.y += 0.002;
-                particles.rotation.z = Math.cos(time * 0.3) * 0.05;
+                // Dynamic cymatics movement
+                particles.rotation.x = Math.sin(time * 0.3) * 0.2;
+                particles.rotation.y += 0.003;
+                particles.rotation.z = Math.cos(time * 0.4) * 0.1;
 
-                // Subtle camera movement
-                camera.position.x = Math.sin(time * 0.2) * 5;
-                camera.position.y = Math.cos(time * 0.2) * 5;
+                // Camera movement for immersion
+                camera.position.x = Math.sin(time * 0.1) * 10;
+                camera.position.y = Math.cos(time * 0.1) * 10;
                 camera.lookAt(0, 0, 0);
 
                 renderer.render(scene, camera);
             }
 
             animate();
-            updateStatus('SUCCESS: ' + particleCount + ' particles running!', false);
+            status.textContent = 'SUCCESS: Cymatics particles running!';
+            status.className = 'success';
+
+        } catch (error) {
+            status.textContent = 'ERROR: ' + error.message;
+            status.className = 'error';
         }
     </script>
 </body>
