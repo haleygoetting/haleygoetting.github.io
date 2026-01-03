@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Scene setup
       this.scene = new THREE.Scene();
-      this.scene.background = new THREE.Color(0x0a0a0a); // Very dark background
+      this.scene.background = new THREE.Color(0x000000); // Pure black background
       console.log('Scene created');
 
       // Camera setup - zoomed in as requested
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.renderer.setPixelRatio(window.devicePixelRatio);
-      this.renderer.setClearColor(0x0a0a0a, 1);
+      this.renderer.setClearColor(0x000000, 1);
       console.log('Renderer created');
 
       // Add renderer to container
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Create grid of particles
       const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
       const sizes = new Float32Array(particleCount);
 
       const gridSize = isMobile ? 90 : 120; // Smaller grid on mobile
@@ -122,20 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
         positions[i3 + 1] = y;
         positions[i3 + 2] = z;
 
-        // Color based on pattern parameters
-        const hue = (this.patternParams.colorHue + Math.sin(x * 0.01) * 30) % 360;
-        const color = new THREE.Color().setHSL(hue / 360, 0.7, 0.6);
-
-        colors[i3] = color.r;
-        colors[i3 + 1] = color.g;
-        colors[i3 + 2] = color.b;
-
         // Vary particle sizes
         sizes[i] = 1 + Math.random() * 2;
       }
 
       this.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      this.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
       this.geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
       // Shader material for custom particle rendering
@@ -150,11 +140,11 @@ document.addEventListener('DOMContentLoaded', function() {
           phaseOffset: { value: this.patternParams.phaseOffset },
           rotationSpeed: { value: this.patternParams.rotationSpeed }
         },
+        transparent: true,
+        blending: THREE.AdditiveBlending
         vertexShader: `
           attribute float size;
-          attribute vec3 color;
 
-          varying vec3 vColor;
           varying float vDistance;
 
           uniform float time;
@@ -167,8 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
           uniform float rotationSpeed;
 
           void main() {
-            vColor = color;
-
             // Calculate cymatics wave displacement
             vec3 pos = position;
 
@@ -203,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         `,
         fragmentShader: `
-          varying vec3 vColor;
           varying float vDistance;
 
           void main() {
@@ -215,11 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
             float brightness = 1.0 - vDistance * 0.001;
             brightness = clamp(brightness, 0.3, 1.0);
 
-            gl_FragColor = vec4(vColor * brightness, alpha * 0.8);
+            gl_FragColor = vec4(vec3(brightness), alpha * 0.8);
           }
         `,
         transparent: true,
-        vertexColors: true,
         blending: THREE.AdditiveBlending
       });
 

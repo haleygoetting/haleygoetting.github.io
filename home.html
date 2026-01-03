@@ -3,12 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Haley Goetting — Artist, Scientist, Researcher</title>
-  <link rel="stylesheet" href="css/styles-cymatics.css">
+  <title>Haley Goetting</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000000;
+    }
+    #particle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+    .particle-fallback {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(255, 255, 255, 0.5);
+      font-family: monospace;
+      font-size: 14px;
+      text-align: center;
+      pointer-events: none;
+    }
+  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-  <!-- Cymatics Particle Background -->
   <div id="particle-container">
     <div class="particle-fallback">
       Loading cymatics particles...<br>
@@ -16,68 +41,6 @@
     </div>
   </div>
 
-  <!-- Overlay Content -->
-  <div class="content-overlay">
-    <header class="site-header">
-      <div class="container header-inner">
-        <h1 class="site-title">Haley Goetting</h1>
-        <nav class="site-nav">
-          <a href="index.html">Home</a>
-          <a href="works.html">Works</a>
-          <a href="art-conservation.html">Art Conservation</a>
-          <a href="research.html">Research</a>
-          <a href="b-side.html">B-Side</a>
-          <a href="about.html">About</a>
-        </nav>
-      </div>
-    </header>
-
-    <section class="hero container">
-      <div class="hero-content">
-        <h2>Hi — I’m Haley</h2>
-        <p>
-          I’m an undergraduate scientist, researcher, and artist.
-          This space showcases my work in art, conservation, and research.
-        </p>
-      </div>
-    </section>
-
-    <section class="gallery container">
-      <a href="works.html" class="gallery-item">
-        <div class="gallery-caption">
-          <h3>My Work</h3>
-        </div>
-      </a>
-
-      <a href="research.html" class="gallery-item">
-        <div class="gallery-caption">
-          <h3>Research</h3>
-        </div>
-      </a>
-
-      <a href="art-conservation.html" class="gallery-item">
-        <div class="gallery-caption">
-          <h3>Art Conservation</h3>
-        </div>
-      </a>
-
-      <a href="b-side.html" class="gallery-item">
-        <div class="gallery-caption">
-          <h3>B-Side</h3>
-        </div>
-      </a>
-    </section>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>© <span id="year"></span> Haley Goetting</p>
-      </div>
-    </footer>
-  </div>
-
   <script src="js/cymatics-particles.js"></script>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
