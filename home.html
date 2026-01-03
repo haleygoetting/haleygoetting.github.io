@@ -3,35 +3,85 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Haley Goetting — Artist, Scientist, Researcher</title>
-  <link rel="stylesheet" href="css/styles-cymatics.css">
+  <title>Haley Goetting — Cymatics Particles</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body {
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    #status {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.8);
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      z-index: 1000;
+    }
+    #particle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    console.log('=== PAGE LOADED ===');
-    console.log('Three.js loaded:', typeof THREE !== 'undefined');
-    alert('Page loaded! Check console for messages.');
-  </script>
 </head>
 <body>
-  <!-- Cymatics Particle Background -->
-  <div id="particle-container">
-    <div class="particle-fallback">
-      Loading cymatics particles...<br>
-      If you don't see them, try refreshing the page.
-    </div>
+  <div id="status">
+    Loading particles...<br>
+    <span id="threejs-status">Checking Three.js...</span>
   </div>
 
-  <!-- Navigation Overlay -->
-  <div class="content-overlay">
-    <nav class="site-nav landing-nav">
-      <a href="works.html">Works</a>
-      <a href="art-conservation.html">Art Conservation</a>
-      <a href="research.html">Research</a>
-      <a href="b-side.html">B-Side</a>
-      <a href="about.html">About</a>
-    </nav>
-  </div>
+  <div id="particle-container"></div>
 
-  <script src="js/cymatics-particles.js"></script>
+  <script>
+    // Basic JavaScript test
+    document.getElementById('threejs-status').textContent = 'Three.js loaded: ' + (typeof THREE !== 'undefined');
+
+    // Simple particle system
+    if (typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('particle-container').appendChild(renderer.domElement);
+
+      // Create particles
+      const geometry = new THREE.BufferGeometry();
+      const vertices = [];
+      for (let i = 0; i < 1000; i++) {
+        vertices.push(
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200
+        );
+      }
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+      const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+
+      camera.position.z = 100;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.x += 0.001;
+        particles.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      document.getElementById('status').innerHTML = '✅ Particles loaded successfully!<br>1000 white particles rotating in 3D space.';
+    } else {
+      document.getElementById('status').innerHTML = '❌ Three.js failed to load';
+    }
+  </script>
 </body>
 </html>
