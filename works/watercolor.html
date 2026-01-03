@@ -5,6 +5,84 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Watercolor — Haley Goetting</title>
   <link rel="stylesheet" href="../css/styles.css?v=1767086960">
+  <style>
+    /* Hero section styling for watercolor page */
+    .hero {
+      display: flex;
+      min-height: 70vh;
+      align-items: center;
+      padding: 4rem 0;
+      gap: 4rem;
+    }
+
+    .hero-left {
+      flex: 1;
+      padding-right: 2rem;
+    }
+
+    .hero-left h2 {
+      font-size: 3.5rem;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .hero-left p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #666;
+      margin: 0;
+    }
+
+    .hero-right {
+      flex: 1;
+      height: 500px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .parallax-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .parallax-img {
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 0.1s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        padding: 2rem 0;
+        gap: 2rem;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .hero-left h2 {
+        font-size: 2.5rem;
+      }
+
+      .hero-right {
+        height: 300px;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -21,11 +99,20 @@
     </div>
   </header>
 
-  <main class="container">
-    <section class="project-page">
+  <section class="hero container">
+    <div class="hero-left">
       <h2>Watercolor Series</h2>
       <p>Short description of this project and medium.</p>
+    </div>
+    <div class="hero-right">
+      <div class="parallax-container">
+        <img src="../images/fall.jpg" alt="Watercolor fall by Haley Goetting" class="parallax-img">
+      </div>
+    </div>
+  </section>
 
+  <main class="container">
+    <section class="project-page">
       <div class="gallery">
         <div class="gallery-item">
           <img src="../images/andtheblackholesingstheblues.jpg" alt="Watercolor Blackhole Blues by Haley Goetting">
@@ -73,6 +160,7 @@
   </footer>
 
 
+  <script src="../js/parallax.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
