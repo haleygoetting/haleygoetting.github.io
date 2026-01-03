@@ -1,87 +1,98 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Haley Goetting — Cymatics Particles</title>
-  <style>
-    * { margin: 0; padding: 0; }
-    body {
-      background: #000;
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
-    #status {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.8);
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 12px;
-      z-index: 1000;
-    }
-    #particle-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>Cymatics Particles</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            overflow: hidden;
+        }
+        #container {
+            width: 100vw;
+            height: 100vh;
+        }
+        #status {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: monospace;
+            font-size: 12px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <div id="status">
-    Loading particles...<br>
-    <span id="threejs-status">Checking Three.js...</span>
-  </div>
+    <div id="status">Loading...</div>
+    <div id="container"></div>
 
-  <div id="particle-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Simple cymatics particle system
+        const status = document.getElementById('status');
+        status.textContent = 'Three.js: ' + (typeof THREE !== 'undefined' ? 'Loaded' : 'Failed');
 
-  <script>
-    // Basic JavaScript test
-    document.getElementById('threejs-status').textContent = 'Three.js loaded: ' + (typeof THREE !== 'undefined');
+        if (typeof THREE !== 'undefined') {
+            // Scene setup
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
 
-    // Simple particle system
-    if (typeof THREE !== 'undefined') {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById('particle-container').appendChild(renderer.domElement);
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 100;
 
-      // Create particles
-      const geometry = new THREE.BufferGeometry();
-      const vertices = [];
-      for (let i = 0; i < 1000; i++) {
-        vertices.push(
-          (Math.random() - 0.5) * 200,
-          (Math.random() - 0.5) * 200,
-          (Math.random() - 0.5) * 200
-        );
-      }
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            // Renderer
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('container').appendChild(renderer.domElement);
 
-      const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
+            // Particles
+            const particleCount = 2000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
 
-      camera.position.z = 100;
+            // Create particle grid
+            const gridSize = Math.sqrt(particleCount);
+            let index = 0;
+            for (let x = 0; x < gridSize; x++) {
+                for (let y = 0; y < gridSize; y++) {
+                    positions[index * 3] = (x - gridSize/2) * 4;
+                    positions[index * 3 + 1] = (y - gridSize/2) * 4;
+                    positions[index * 3 + 2] = (Math.random() - 0.5) * 20;
+                    index++;
+                    if (index >= particleCount) break;
+                }
+                if (index >= particleCount) break;
+            }
 
-      function animate() {
-        requestAnimationFrame(animate);
-        particles.rotation.x += 0.001;
-        particles.rotation.y += 0.002;
-        renderer.render(scene, camera);
-      }
-      animate();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const material = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 2,
+                transparent: true,
+                opacity: 0.8
+            });
 
-      document.getElementById('status').innerHTML = '✅ Particles loaded successfully!<br>1000 white particles rotating in 3D space.';
-    } else {
-      document.getElementById('status').innerHTML = '❌ Three.js failed to load';
-    }
-  </script>
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.002;
+                renderer.render(scene, camera);
+            }
+
+            animate();
+            status.textContent = 'Particles: ' + particleCount + ' - Running';
+        } else {
+            status.textContent = 'ERROR: Three.js not loaded';
+        }
+    </script>
 </body>
 </html>
