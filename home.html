@@ -36,69 +36,26 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.getElementById('particle-container').appendChild(renderer.domElement);
 
-      // Create particles in a rectangular prism shape
+      // Create particles in a more organic, dispersed cloud shape
       const geometry = new THREE.BufferGeometry();
       const vertices = [];
 
-      // Rectangular prism dimensions
-      const width = 120;
-      const height = 80;
-      const depth = 60;
+      for (let i = 0; i < 1000; i++) {
+        // Create a more organic distribution with some structure
+        const angle1 = Math.random() * Math.PI * 2;
+        const angle2 = Math.random() * Math.PI * 2;
+        const radius1 = Math.random() * 80 + 20; // Base radius with variation
+        const radius2 = Math.random() * 60 + 15;
 
-      // Create particles on the surfaces of the rectangular prism
-      const particlesPerFace = 1000 / 6; // 6 faces
+        // Add some noise to break up perfect geometry
+        const noise1 = (Math.random() - 0.5) * 40;
+        const noise2 = (Math.random() - 0.5) * 30;
+        const noise3 = (Math.random() - 0.5) * 35;
 
-      // Front face (Z = depth/2)
-      for (let i = 0; i < particlesPerFace; i++) {
         vertices.push(
-          (Math.random() - 0.5) * width,
-          (Math.random() - 0.5) * height,
-          depth / 2
-        );
-      }
-
-      // Back face (Z = -depth/2)
-      for (let i = 0; i < particlesPerFace; i++) {
-        vertices.push(
-          (Math.random() - 0.5) * width,
-          (Math.random() - 0.5) * height,
-          -depth / 2
-        );
-      }
-
-      // Right face (X = width/2)
-      for (let i = 0; i < particlesPerFace; i++) {
-        vertices.push(
-          width / 2,
-          (Math.random() - 0.5) * height,
-          (Math.random() - 0.5) * depth
-        );
-      }
-
-      // Left face (X = -width/2)
-      for (let i = 0; i < particlesPerFace; i++) {
-        vertices.push(
-          -width / 2,
-          (Math.random() - 0.5) * height,
-          (Math.random() - 0.5) * depth
-        );
-      }
-
-      // Top face (Y = height/2)
-      for (let i = 0; i < particlesPerFace; i++) {
-        vertices.push(
-          (Math.random() - 0.5) * width,
-          height / 2,
-          (Math.random() - 0.5) * depth
-        );
-      }
-
-      // Bottom face (Y = -height/2)
-      for (let i = 0; i < particlesPerFace; i++) {
-        vertices.push(
-          (Math.random() - 0.5) * width,
-          -height / 2,
-          (Math.random() - 0.5) * depth
+          Math.cos(angle1) * radius1 + noise1,
+          Math.sin(angle2) * radius2 + noise2,
+          Math.cos(angle1 + angle2) * (radius1 + radius2) * 0.3 + noise3
         );
       }
 
