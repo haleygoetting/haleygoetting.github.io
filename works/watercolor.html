@@ -49,14 +49,14 @@
     }
 
     .parallax-img {
-      width: 120%;
+      width: 200%;
       height: 130%;
       display: block;
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0; /* Align to right instead of left */
       object-fit: cover;
-      object-position: center 60%; /* Crop more from bottom */
+      object-position: right 60%; /* Anchor to right side, crop bottom */
       transition: transform 0.1s ease-out;
     }
 
@@ -88,10 +88,10 @@
       }
 
       .parallax-img {
-        width: 110%;
+        width: 180%;
         height: 120%;
         object-fit: cover;
-        object-position: center 60%;
+        object-position: right 60%;
       }
     }
   </style>
