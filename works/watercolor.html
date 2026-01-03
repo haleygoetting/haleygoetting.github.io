@@ -47,12 +47,13 @@
     }
 
     .parallax-img {
-      width: 120%;
+      width: 140%;
       height: auto;
       display: block;
       position: absolute;
       top: 0;
       left: 0;
+      object-position: center bottom; /* Crop from bottom */
       transition: transform 0.1s ease-out;
     }
 
@@ -84,7 +85,8 @@
       }
 
       .parallax-img {
-        width: 100%;
+        width: 120%;
+        object-position: center bottom;
       }
     }
   </style>
@@ -125,10 +127,6 @@
 
         <div class="gallery-item">
           <img src="../images/bubbleface.jpg" alt="Watercolor bubbleface by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/fall.jpg" alt="Watercolor fall by Haley Goetting">
         </div>
 
         <div class="gallery-item">
