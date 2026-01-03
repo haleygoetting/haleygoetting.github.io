@@ -6,27 +6,45 @@
   <title>Watercolor — Haley Goetting</title>
   <link rel="stylesheet" href="../css/styles.css?v=1767086960">
   <style>
-    /* Hero section styling - exact match from working version */
+    /* Hero section styling - text left, image right */
     .hero {
       margin: 20px auto 20px;
       max-width: 2000px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
     }
 
     .hero-left {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
+      flex: 1;
+      padding-right: 2rem;
+    }
+
+    .hero-left h2 {
+      font-size: 3.5rem;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .hero-left p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #666;
+      margin: 0;
+    }
+
+    .hero-right {
+      flex: 1;
       position: relative;
     }
 
     .parallax-container {
-      width: 70%;
+      width: 100%;
       height: 80vh;
       overflow: hidden;
       border-radius: var(--radius);
-      order: 2;
     }
 
     .parallax-img {
@@ -38,67 +56,38 @@
       left: -10%;
     }
 
-    .hero-overlay {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      position: relative;
-      width: 25%;
-      order: 1;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 16px;
-      border-radius: var(--radius);
-      margin-right: var(--gap);
-    }
-
-    .hero-overlay h2 {
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      margin-bottom: 12px;
-      order: 1 !important;
-    }
-
-    .hero-overlay p {
-      font-size: 1.2rem;
-      color: var(--muted);
-      margin-bottom: 16px;
-      order: 2 !important;
-    }
-
     /* MOBILE RESPONSIVE */
     @media (max-width: 720px) {
+      .hero {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 0;
+      }
+
       .hero-left {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .hero-left img {
-        width: 90%;
-        margin: 0 auto;
-        display: block;
-        order: 0;
-      }
-
-      .hero-overlay {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: static;
-        transform: none;
-        max-width: 100%;
-        background: none;
-        padding: 0;
+        padding-right: 0;
         text-align: center;
-        margin-top: 16px;
         order: 1;
       }
 
-      .hero-overlay h2 {
-        order: 1;
+      .hero-left h2 {
+        font-size: 2.5rem;
       }
 
-      .hero-overlay p {
-        order: 2;
+      .hero-right {
+        order: 0;
+        width: 100%;
+      }
+
+      .parallax-container {
+        width: 90%;
+        height: 60vh;
+        margin: 0 auto;
+      }
+
+      .parallax-img {
+        width: 120%;
+        left: -10%;
       }
     }
   </style>
@@ -120,13 +109,12 @@
 
   <section class="hero container">
     <div class="hero-left">
+      <h2>Watercolor Series</h2>
+      <p>Short description of this project and medium.</p>
+    </div>
+    <div class="hero-right">
       <div class="parallax-container">
         <img src="../images/fall.jpg" alt="Watercolor fall by Haley Goetting" class="parallax-img">
-      </div>
-
-      <div class="hero-overlay">
-        <h2>Watercolor Series</h2>
-        <p>Short description of this project and medium.</p>
       </div>
     </div>
   </section>
