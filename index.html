@@ -22,22 +22,24 @@
     .content-overlay {
       position: absolute;
       z-index: 1;
-      top: 55%; /* Moved up higher on the page */
+      top: 50%; /* Mid-page height */
       right: 0;
-      width: 50%; /* Right half of the page */
-      height: 45%; /* Increased height for larger text */
+      width: 60%; /* Wider area for right alignment */
+      height: 50%; /* Full bottom half */
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end; /* Right align all content */
       justify-content: flex-start;
       gap: 20px;
       padding-top: 10px;
+      padding-right: 30px; /* Add padding from right edge */
     }
 
     /* Name Title */
     .name-title {
-      text-align: center;
+      text-align: right; /* Right-align the text */
       margin-bottom: 0;
+      width: 100%;
     }
 
     .name-title h1 {
