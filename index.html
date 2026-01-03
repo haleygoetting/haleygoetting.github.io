@@ -147,18 +147,25 @@
 <body>
   <div id="particle-container"></div>
 
-  <!-- Navigation Overlay -->
-  <div class="content-overlay">
-    <div class="name-title">
-      <h1>Haley<br>Goetting</h1>
+  <!-- DEBUG: Direct HTML without CSS positioning -->
+  <div style="
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    z-index: 9999;
+    background: red;
+    border: 5px solid yellow;
+    padding: 20px;
+    color: white;
+    font-size: 24px;
+    font-family: Arial;
+  ">
+    <div>DEBUG: If you see this, HTML is working!</div>
+    <div style="font-size: 48px; color: blue; margin: 20px 0;">Haley<br>Goetting</div>
+    <div style="margin-top: 20px;">
+      <a href="works.html" style="color: white; text-decoration: none; margin: 0 10px; padding: 10px; background: black;">Works</a>
+      <a href="about.html" style="color: white; text-decoration: none; margin: 0 10px; padding: 10px; background: black;">About</a>
     </div>
-    <nav class="site-nav landing-nav">
-      <a href="works.html">Works</a>
-      <a href="art-conservation.html">Art Conservation</a>
-      <a href="research.html">Research</a>
-      <a href="b-side.html">B-Side</a>
-      <a href="about.html">About</a>
-    </nav>
   </div>
 
   <script>
