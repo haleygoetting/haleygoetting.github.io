@@ -18,11 +18,11 @@
       height: 100vh;
     }
 
-    /* Title Container - positioned at mid-page */
+    /* Title Container - positioned higher up */
     .title-container {
       position: fixed;
       z-index: 10;
-      top: 45%; /* Mid-page height */
+      top: 35%; /* Moved higher up */
       right: 20px;
       width: auto;
       pointer-events: none; /* Allow particles to show through */
@@ -52,15 +52,15 @@
     }
 
     .name-title h1 {
-      font-family: 'Times New Roman', 'Garamond', 'Georgia', serif;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
       font-size: 6rem;
-      font-weight: 200;
+      font-weight: 100; /* Even lighter for skinnier look */
       color: rgba(255, 255, 255, 0.95);
       margin: 0;
       line-height: 0.75;
-      letter-spacing: 4px;
+      letter-spacing: 6px; /* Increased for more elegant spacing */
       text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
-      transform: scaleY(1.4);
+      transform: scaleY(1.6); /* More vertical stretching for elegance */
       transform-origin: center;
     }
 
