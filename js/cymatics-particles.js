@@ -38,9 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     init() {
+      console.log('Initializing Three.js scene...');
+
       // Scene setup
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(0x0a0a0a); // Very dark background
+      console.log('Scene created');
 
       // Camera setup - zoomed in as requested
       this.camera = new THREE.PerspectiveCamera(
@@ -50,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         1000
       );
       this.camera.position.z = 50; // Closer zoom for bigger patterns
+      console.log('Camera created');
 
       // Renderer setup
       this.renderer = new THREE.WebGLRenderer({
@@ -59,10 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setClearColor(0x0a0a0a, 1);
+      console.log('Renderer created');
 
       // Add renderer to container
       const container = document.getElementById('particle-container');
-      container.appendChild(this.renderer.domElement);
+      console.log('Container element:', container);
+
+      if (container) {
+        container.appendChild(this.renderer.domElement);
+        console.log('Renderer canvas added to container');
+      } else {
+        console.error('Particle container not found!');
+      }
     }
 
     generateRandomPattern() {
@@ -234,6 +246,15 @@ document.addEventListener('DOMContentLoaded', function() {
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
+  }
+
+  // Add some debugging
+  console.log('Initializing cymatics particles...');
+
+  // Check if Three.js is loaded
+  if (typeof THREE === 'undefined') {
+    console.error('Three.js not loaded!');
+    return;
   }
 
   // Initialize the particle system
