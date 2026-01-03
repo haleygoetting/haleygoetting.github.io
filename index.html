@@ -21,7 +21,7 @@
     /* Navigation Overlay */
     .content-overlay {
       position: absolute;
-      z-index: 1;
+      z-index: 10; /* Increased z-index */
       top: 50%; /* Mid-page height */
       right: 20px; /* Position from right edge */
       width: auto; /* Auto width for content */
@@ -32,6 +32,8 @@
       justify-content: flex-start;
       gap: 20px;
       padding-top: 10px;
+      background: rgba(255, 0, 0, 0.3); /* Temporary red background for debugging */
+      border: 2px solid yellow; /* Yellow border to see the container */
     }
 
     /* Name Title */
