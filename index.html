@@ -145,28 +145,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-  <div id="particle-container"></div>
-
-  <!-- DEBUG: Direct HTML without CSS positioning -->
+  <!-- EMERGENCY DEBUG: Put this FIRST -->
   <div style="
     position: fixed;
-    top: 100px;
-    right: 50px;
-    z-index: 9999;
-    background: red;
-    border: 5px solid yellow;
-    padding: 20px;
-    color: white;
-    font-size: 24px;
-    font-family: Arial;
+    top: 50px;
+    left: 50px;
+    z-index: 10000;
+    background: #ff0000;
+    border: 10px solid #ffff00;
+    padding: 30px;
+    color: #ffffff;
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    box-shadow: 0 0 50px rgba(255,0,0,0.8);
   ">
-    <div>DEBUG: If you see this, HTML is working!</div>
-    <div style="font-size: 48px; color: blue; margin: 20px 0;">Haley<br>Goetting</div>
-    <div style="margin-top: 20px;">
-      <a href="works.html" style="color: white; text-decoration: none; margin: 0 10px; padding: 10px; background: black;">Works</a>
-      <a href="about.html" style="color: white; text-decoration: none; margin: 0 10px; padding: 10px; background: black;">About</a>
-    </div>
+    🚨 EMERGENCY DEBUG 🚨<br>
+    If you see this RED BOX,<br>
+    HTML is working!<br>
+    <span style="color: #00ff00; font-size: 48px;">✓ VISIBLE</span>
   </div>
+
+  <div id="particle-container"></div>
 
   <script>
     // Clean 3D particle system - no status messages
