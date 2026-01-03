@@ -9,25 +9,21 @@
             background: #000000;
             overflow: hidden;
         }
-        #container {
-            width: 100vw;
-            height: 100vh;
+        canvas {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div id="container"></div>
+    <canvas id="canvas"></canvas>
 
     <script>
-        // Simple 2D canvas particle system
-        const container = document.getElementById('container');
-        const canvas = document.createElement('canvas');
+        // Clean cymatics particle system - no status messages
+        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        canvas.style.display = 'block';
-        container.appendChild(canvas);
 
         // Particle system
         const particles = [];
