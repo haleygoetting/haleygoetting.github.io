@@ -20,9 +20,12 @@
 
     /* Navigation Overlay */
     .content-overlay {
-      position: relative;
+      position: absolute;
       z-index: 1;
-      min-height: 100vh;
+      top: 75%; /* 3/4 down the page */
+      right: 0;
+      width: 50%; /* Right half of the page */
+      height: 25%; /* Bottom quarter */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -30,56 +33,69 @@
 
     .landing-nav {
       display: flex;
-      gap: 40px;
+      gap: 20px;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
+      max-width: 100%;
     }
 
     .landing-nav a {
       text-decoration: none;
       color: rgba(255, 255, 255, 0.8);
       font-weight: 500;
-      font-size: 1.2rem;
-      padding: 15px 25px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 10px;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      border: none; /* Remove white outline */
+      border-radius: 8px;
       background: rgba(0,0,0,0.7);
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
       font-family: Arial, sans-serif;
+      white-space: nowrap;
     }
 
     .landing-nav a:hover {
       color: #ffffff;
-      border-color: rgba(138,124,255,0.8);
-      background: rgba(138,124,255,0.2);
+      background: rgba(138,124,255,0.3);
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(138,124,255,0.4);
+      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
     }
 
     @media (max-width: 768px) {
-      .landing-nav {
-        gap: 20px;
-        padding: 20px;
+      .content-overlay {
+        top: 70%;
+        width: 70%;
+        right: 0;
       }
 
-      .landing-nav a {
-        font-size: 1rem;
-        padding: 12px 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
       .landing-nav {
-        flex-direction: column;
         gap: 15px;
       }
 
       .landing-nav a {
-        width: 100%;
-        max-width: 200px;
-        text-align: center;
+        font-size: 1rem;
+        padding: 10px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-overlay {
+        top: 65%;
+        width: 90%;
+        right: 0;
+      }
+
+      .landing-nav {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .landing-nav a {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+        flex: 0 1 auto;
       }
     }
   </style>
