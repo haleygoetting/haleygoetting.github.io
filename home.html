@@ -8,6 +8,8 @@
             padding: 0;
             background: #000000;
             overflow: hidden;
+            font-family: monospace;
+            color: white;
         }
         #container {
             width: 100vw;
@@ -17,26 +19,65 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            color: white;
-            font-family: monospace;
-            font-size: 12px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             padding: 10px;
             border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .error {
+            color: #ff6666;
+        }
+        .success {
+            color: #66ff66;
         }
     </style>
 </head>
 <body>
-    <div id="status">Loading...</div>
+    <div id="status">Initializing particle system...</div>
     <div id="container"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Simple cymatics particle system
-        const status = document.getElementById('status');
-        status.textContent = 'Three.js: ' + (typeof THREE !== 'undefined' ? 'Loaded' : 'Failed');
+    <!-- Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-NLx0V1FJu4rAGW5L8c9Q1+JMZ3Q0SYP5sSYZuEEVB0EiXtFXSYg7HbzYw5kzx+KzfGYtNKjEOtZbQGqfWvZVHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        if (typeof THREE !== 'undefined') {
+    <script>
+        const status = document.getElementById('status');
+
+        // Check if we're running from a server (not file://)
+        const isLocalServer = window.location.protocol !== 'file:';
+
+        function updateStatus(message, isError = false) {
+            status.textContent = message;
+            status.className = isError ? 'error' : (message.includes('Running') ? 'success' : '');
+        }
+
+        updateStatus('Checking environment...');
+
+        // Check if we're on a local server
+        if (!isLocalServer) {
+            updateStatus('ERROR: Must run from local server (http://localhost:9000), not file://', true);
+            return;
+        }
+
+        updateStatus('Checking Three.js...');
+
+        // Check Three.js after a brief delay to ensure it loads
+        setTimeout(() => {
+            if (typeof THREE === 'undefined') {
+                updateStatus('ERROR: Three.js failed to load from CDN', true);
+                return;
+            }
+
+            updateStatus('Three.js loaded, creating particles...');
+
+            try {
+                createParticleSystem();
+            } catch (error) {
+                updateStatus('ERROR: ' + error.message, true);
+            }
+        }, 1000);
+
+        function createParticleSystem() {
             // Scene setup
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(0x000000);
@@ -46,52 +87,77 @@
             camera.position.z = 100;
 
             // Renderer
-            const renderer = new THREE.WebGLRenderer();
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.getElementById('container').appendChild(renderer.domElement);
+
+            const container = document.getElementById('container');
+            container.appendChild(renderer.domElement);
+
+            updateStatus('Renderer created, generating particles...');
 
             // Particles
-            const particleCount = 2000;
+            const particleCount = 3000;
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(particleCount * 3);
 
-            // Create particle grid
-            const gridSize = Math.sqrt(particleCount);
+            // Create particle grid with some cymatics-like patterns
+            const gridSize = Math.ceil(Math.sqrt(particleCount));
             let index = 0;
+
             for (let x = 0; x < gridSize; x++) {
                 for (let y = 0; y < gridSize; y++) {
-                    positions[index * 3] = (x - gridSize/2) * 4;
-                    positions[index * 3 + 1] = (y - gridSize/2) * 4;
-                    positions[index * 3 + 2] = (Math.random() - 0.5) * 20;
-                    index++;
                     if (index >= particleCount) break;
+
+                    // Create some wave-like displacement
+                    const waveX = Math.sin(x * 0.1) * 10;
+                    const waveY = Math.cos(y * 0.1) * 10;
+
+                    positions[index * 3] = (x - gridSize/2) * 3 + waveX;
+                    positions[index * 3 + 1] = (y - gridSize/2) * 3 + waveY;
+                    positions[index * 3 + 2] = (Math.sin(x * 0.05 + y * 0.05) - 0.5) * 30;
+
+                    index++;
                 }
                 if (index >= particleCount) break;
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
             const material = new THREE.PointsMaterial({
                 color: 0xffffff,
                 size: 2,
                 transparent: true,
-                opacity: 0.8
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
             });
 
             const particles = new THREE.Points(geometry, material);
             scene.add(particles);
 
-            // Animation
+            updateStatus('Particles created, starting animation...');
+
+            // Animation loop
+            let time = 0;
             function animate() {
                 requestAnimationFrame(animate);
-                particles.rotation.x += 0.001;
+
+                time += 0.01;
+
+                // Add some dynamic movement
+                particles.rotation.x = Math.sin(time * 0.5) * 0.1;
                 particles.rotation.y += 0.002;
+                particles.rotation.z = Math.cos(time * 0.3) * 0.05;
+
+                // Subtle camera movement
+                camera.position.x = Math.sin(time * 0.2) * 5;
+                camera.position.y = Math.cos(time * 0.2) * 5;
+                camera.lookAt(0, 0, 0);
+
                 renderer.render(scene, camera);
             }
 
             animate();
-            status.textContent = 'Particles: ' + particleCount + ' - Running';
-        } else {
-            status.textContent = 'ERROR: Three.js not loaded';
+            updateStatus('SUCCESS: ' + particleCount + ' particles running!', false);
         }
     </script>
 </body>
