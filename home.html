@@ -36,28 +36,92 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.getElementById('particle-container').appendChild(renderer.domElement);
 
-      // Create particles in 3D space
+      // Create particles in a rectangular prism shape
       const geometry = new THREE.BufferGeometry();
       const vertices = [];
-      for (let i = 0; i < 1000; i++) {
+
+      // Rectangular prism dimensions
+      const width = 120;
+      const height = 80;
+      const depth = 60;
+
+      // Create particles on the surfaces of the rectangular prism
+      const particlesPerFace = 1000 / 6; // 6 faces
+
+      // Front face (Z = depth/2)
+      for (let i = 0; i < particlesPerFace; i++) {
         vertices.push(
-          (Math.random() - 0.5) * 200,
-          (Math.random() - 0.5) * 200,
-          (Math.random() - 0.5) * 200
+          (Math.random() - 0.5) * width,
+          (Math.random() - 0.5) * height,
+          depth / 2
         );
       }
+
+      // Back face (Z = -depth/2)
+      for (let i = 0; i < particlesPerFace; i++) {
+        vertices.push(
+          (Math.random() - 0.5) * width,
+          (Math.random() - 0.5) * height,
+          -depth / 2
+        );
+      }
+
+      // Right face (X = width/2)
+      for (let i = 0; i < particlesPerFace; i++) {
+        vertices.push(
+          width / 2,
+          (Math.random() - 0.5) * height,
+          (Math.random() - 0.5) * depth
+        );
+      }
+
+      // Left face (X = -width/2)
+      for (let i = 0; i < particlesPerFace; i++) {
+        vertices.push(
+          -width / 2,
+          (Math.random() - 0.5) * height,
+          (Math.random() - 0.5) * depth
+        );
+      }
+
+      // Top face (Y = height/2)
+      for (let i = 0; i < particlesPerFace; i++) {
+        vertices.push(
+          (Math.random() - 0.5) * width,
+          height / 2,
+          (Math.random() - 0.5) * depth
+        );
+      }
+
+      // Bottom face (Y = -height/2)
+      for (let i = 0; i < particlesPerFace; i++) {
+        vertices.push(
+          (Math.random() - 0.5) * width,
+          -height / 2,
+          (Math.random() - 0.5) * depth
+        );
+      }
+
       geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
       const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
       const particles = new THREE.Points(geometry, material);
+
+      // Offset to rotate around corner instead of center
+      particles.position.set(-width/4, -height/4, -depth/4);
+
       scene.add(particles);
 
-      camera.position.z = 100;
+      camera.position.z = 300;
 
       function animate() {
         requestAnimationFrame(animate);
+
+        // Rotate around corner axis
         particles.rotation.x += 0.001;
         particles.rotation.y += 0.002;
+        particles.rotation.z += 0.0005;
+
         renderer.render(scene, camera);
       }
       animate();
