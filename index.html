@@ -20,20 +20,20 @@
 
     /* Navigation Overlay */
     .content-overlay {
-      position: absolute;
-      z-index: 10; /* Increased z-index */
-      top: 50%; /* Mid-page height */
-      right: 20px; /* Position from right edge */
-      width: auto; /* Auto width for content */
-      height: 50%; /* Full bottom half */
+      position: fixed; /* Changed from absolute to fixed */
+      z-index: 100; /* Much higher z-index */
+      top: 40%; /* Moved higher up */
+      right: 0; /* Right edge */
+      width: 300px; /* Fixed width */
+      height: 60%; /* Fixed height */
       display: flex;
       flex-direction: column;
       align-items: flex-end; /* Right align all content */
       justify-content: flex-start;
       gap: 20px;
-      padding-top: 10px;
-      background: rgba(255, 0, 0, 0.3); /* Temporary red background for debugging */
-      border: 2px solid yellow; /* Yellow border to see the container */
+      padding: 20px;
+      background: rgba(255, 0, 0, 0.5); /* More visible red background */
+      border: 3px solid yellow; /* Thicker yellow border */
     }
 
     /* Name Title */
