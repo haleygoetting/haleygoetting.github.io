@@ -20,20 +20,18 @@
 
     /* Navigation Overlay */
     .content-overlay {
-      position: fixed; /* Changed from absolute to fixed */
-      z-index: 100; /* Much higher z-index */
-      top: 40%; /* Moved higher up */
-      right: 0; /* Right edge */
-      width: 300px; /* Fixed width */
-      height: 60%; /* Fixed height */
+      position: fixed;
+      z-index: 10;
+      top: 50%;
+      right: 20px;
+      width: auto;
+      height: 50%;
       display: flex;
       flex-direction: column;
-      align-items: flex-end; /* Right align all content */
+      align-items: flex-end;
       justify-content: flex-start;
       gap: 20px;
-      padding: 20px;
-      background: rgba(255, 0, 0, 0.5); /* More visible red background */
-      border: 3px solid yellow; /* Thicker yellow border */
+      padding-top: 10px;
     }
 
     /* Name Title */
@@ -47,9 +45,7 @@
       font-family: 'Times New Roman', 'Garamond', 'Georgia', serif;
       font-size: 6rem;
       font-weight: 200;
-      color: #ff0000; /* Temporarily red for debugging */
-      background: rgba(0, 0, 0, 0.5); /* Add background for visibility */
-      padding: 10px;
+      color: rgba(255, 255, 255, 0.95);
       margin: 0;
       line-height: 0.75;
       letter-spacing: 4px;
