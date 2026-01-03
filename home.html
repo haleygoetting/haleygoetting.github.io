@@ -310,7 +310,7 @@
             });
 
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+            // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Not available in minimal implementation
 
             // Add renderer to DOM
             const container = document.getElementById('container');
