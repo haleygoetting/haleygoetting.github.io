@@ -30,7 +30,8 @@
       scene.background = new THREE.Color(0x000000);
 
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-      camera.position.z = 200;
+      camera.position.set(-80, 0, 200); // Offset to the left so particles appear on the right
+      camera.lookAt(0, 0, 0); // Look at the particle cloud center
 
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
