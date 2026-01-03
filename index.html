@@ -18,7 +18,24 @@
       height: 100vh;
     }
 
-    /* Navigation Overlay */
+    /* Title Container - positioned at mid-page */
+    .title-container {
+      position: fixed;
+      z-index: 10;
+      top: 45%; /* Mid-page height */
+      right: 20px;
+      width: auto;
+      pointer-events: none; /* Allow particles to show through */
+    }
+
+    /* Name Title */
+    .name-title {
+      text-align: right;
+      margin-bottom: 0;
+      max-width: 400px;
+    }
+
+    /* Navigation Overlay - stays in same position */
     .content-overlay {
       position: fixed;
       z-index: 10;
@@ -32,13 +49,6 @@
       justify-content: flex-start;
       gap: 20px;
       padding-top: 10px;
-    }
-
-    /* Name Title */
-    .name-title {
-      text-align: right; /* Right-align the text */
-      margin-bottom: 0;
-      max-width: 400px; /* Limit width to prevent overflow */
     }
 
     .name-title h1 {
@@ -142,11 +152,15 @@
 <body>
   <div id="particle-container"></div>
 
-  <!-- Navigation Overlay -->
-  <div class="content-overlay">
+  <!-- Title positioned separately -->
+  <div class="title-container">
     <div class="name-title">
       <h1>Haley<br>Goetting</h1>
     </div>
+  </div>
+
+  <!-- Navigation Overlay (buttons stay in same place) -->
+  <div class="content-overlay">
     <nav class="site-nav landing-nav">
       <a href="works.html">Works</a>
       <a href="art-conservation.html">Art Conservation</a>
