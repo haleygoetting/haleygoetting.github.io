@@ -5,20 +5,85 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Works — Haley Goetting</title>
   <link rel="stylesheet" href="css/styles-cymatics.css">
+  <style>
+    /* Page header styling */
+    .page-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .header-nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 200;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 0.5px;
+    }
+
+    .header-nav a:hover {
+      color: #ffffff;
+      background: rgba(138,124,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(138,124,255,0.4);
+    }
+
+    /* Adjust main content to account for fixed header */
+    main {
+      margin-top: 80px;
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 15px;
+      }
+
+      .header-nav {
+        gap: 10px;
+      }
+
+      .header-nav a {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+
+      main {
+        margin-top: 70px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="site-title">Haley Goetting</h1>
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="works.html">Works</a>
-        <a href="art-conservation.html">Art Conservation</a>
-        <a href="research.html">Research</a>
-        <a href="b-side.html">B-Side</a>
-        <a href="about.html">About</a>
-      </nav>
-    </div>
+  <!-- Header with matching navigation -->
+  <header class="page-header">
+    <nav class="landing-nav header-nav">
+      <a href="index.html">Home</a>
+      <a href="works.html">Works</a>
+      <a href="art-conservation.html">Art Conservation</a>
+      <a href="research.html">Research</a>
+      <a href="b-side.html">B-Side</a>
+      <a href="about.html">About</a>
+    </nav>
   </header>
 
   <main class="container">
