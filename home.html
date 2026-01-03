@@ -3,42 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Haley Goetting</title>
-  <style>
-    * { margin: 0; padding: 0; }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000000;
-    }
-    #particle-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-    }
-    .particle-fallback {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: rgba(255, 255, 255, 0.5);
-      font-family: monospace;
-      font-size: 14px;
-      text-align: center;
-      pointer-events: none;
-    }
-  </style>
+  <title>Haley Goetting — Artist, Scientist, Researcher</title>
+  <link rel="stylesheet" href="css/styles-cymatics.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
+  <!-- Cymatics Particle Background -->
   <div id="particle-container">
     <div class="particle-fallback">
       Loading cymatics particles...<br>
       If you don't see them, try refreshing the page.
     </div>
+  </div>
+
+  <!-- Navigation Overlay -->
+  <div class="content-overlay">
+    <nav class="site-nav landing-nav">
+      <a href="works.html">Works</a>
+      <a href="art-conservation.html">Art Conservation</a>
+      <a href="research.html">Research</a>
+      <a href="b-side.html">B-Side</a>
+      <a href="about.html">About</a>
+    </nav>
   </div>
 
   <script src="js/cymatics-particles.js"></script>
