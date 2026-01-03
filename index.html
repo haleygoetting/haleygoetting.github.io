@@ -1,95 +1,107 @@
 <!doctype html>
-<html lang="en"> <!-- 1 -->
-<head> <!-- 2 -->
-  <meta charset="utf-8"> <!-- 3 -->
-  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- 4 -->
-  <title>Haley Goetting — Art Portfolio</title> <!-- 5 -->
-  <link rel="stylesheet" href="css/styles.css"> <!-- 6 -->
-</head> <!-- 7 -->
-<body> <!-- 8 -->
-  <header class="site-header"> <!-- 9 -->
-    <div class="container header-inner"> <!-- 10 -->
-      <h1 class="site-title">Haley Goetting</h1> <!-- 11 -->
-  <nav class="site-nav">
-    <a href="index.html">Work</a>
-    <a href="about.html">About</a>
-    <a href="watercolor.html">Watercolor</a>
-    <a href="digital.html">Digital</a>
-    <a href="sketches.html">Sketches</a>
-    <a href="prints.html">Prints</a>
-  </nav> 
-  </div> <!-- 20 -->
-  </header> <!-- 21 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cymatics Particles</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body {
+      background: #000;
+      overflow: hidden;
+    }
+    #particle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div id="particle-container"></div>
 
-  <section class="hero container">
-  <div class="hero-left">
-    <img src="images/startransparent.jpg" alt="Watercolor star painting by Haley">
-    
-    <!-- Overlay text inside the same container -->
-    <div class="hero-overlay">
-      <h2>Hi — I’m Haley</h2>
-      <p>
-        I’m an undergraduate scientist, researcher, and artist. 
-        This space collects selected works in watercolor, digital media, and print.
-      </p>
-      <img src="images/me.jpg" alt="Portrait of Haley" class="hero-headshot">
-    </div>
-  </div>
-</section>
+  <script>
+    // Clean 3D particle system - no status messages
+    if (typeof THREE !== 'undefined') {
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
 
-    
-<section class="gallery container">
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+      camera.position.set(-80, 0, 200); // Offset to the left so particles appear on the right
+      camera.lookAt(0, 0, 0); // Look at the particle cloud center
 
-  <a href="watercolor.html" class="gallery-item">
-    <img src="images/andtheblackholesingstheblues.jpg"
-         alt="Watercolor painting by Haley Goetting">
-    <div class="gallery-caption">
-      <h3>Watercolor</h3>
-      <p>Studies in color, atmosphere, and quiet observation.</p>
-    </div>
-  </a>
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('particle-container').appendChild(renderer.domElement);
 
-  <a href="digital.html" class="gallery-item">
-    <img src="images/digitalcard.jpg"
-         alt="Digital artwork by Haley Goetting">
-    <div class="gallery-caption">
-      <h3>Digital</h3>
-      <p>Collage, texture, and experimental compositions.</p>
-    </div>
-  </a>
+      // Create particles in a more organic, dispersed cloud shape
+      const geometry = new THREE.BufferGeometry();
+      const vertices = [];
 
-  <a href="sketches.html" class="gallery-item">
-    <img src="images/sketchcard.jpg"
-         alt="Sketchbook work by Haley Goetting">
-    <div class="gallery-caption">
-      <h3>Sketchbook</h3>
-      <p>Process drawings and daily visual notes.</p>
-    </div>
-  </a>
+      for (let i = 0; i < 1000; i++) {
+        // Create a more organic distribution with some structure
+        const angle1 = Math.random() * Math.PI * 2;
+        const angle2 = Math.random() * Math.PI * 2;
+        const radius1 = Math.random() * 80 + 20; // Base radius with variation
+        const radius2 = Math.random() * 60 + 15;
 
-  <a href="prints.html" class="gallery-item">
-    <img src="images/printscard.jpg"
-         alt="Printmaking by Haley Goetting">
-    <div class="gallery-caption">
-      <h3>Prints</h3>
-      <p>Small editions and letterpress experiments.</p>
-    </div>
-  </a>
+        // Add some noise to break up perfect geometry
+        const noise1 = (Math.random() - 0.5) * 40;
+        const noise2 = (Math.random() - 0.5) * 30;
+        const noise3 = (Math.random() - 0.5) * 35;
 
-</section>
+        vertices.push(
+          Math.cos(angle1) * radius1 + noise1,
+          Math.sin(angle2) * radius2 + noise2,
+          Math.cos(angle1 + angle2) * (radius1 + radius2) * 0.3 + noise3
+        );
+      }
 
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-  </main> <!-- 69 -->
+      const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
+      const particles = new THREE.Points(geometry, material);
 
-  <footer class="site-footer"> <!-- 70 -->
-    <div class="container"> <!-- 71 -->
-      <p>© <span id="year"></span> Haley Goetting — <a href="mailto:h_goetting@coloradocollege.edu">h_goetting@coloradocollege.edu</a></p> <!-- 72 -->
-    </div> <!-- 73 -->
-  </footer> <!-- 74 -->
+      // Offset to rotate around corner instead of center
+      particles.position.set(-30, -20, -15);
 
-  <script> /* small script to set current year in footer */  /* 75 */ 
-    document.getElementById('year').textContent = new Date().getFullYear(); /* 76 */
-  </script> <!-- 77 -->
+      scene.add(particles);
 
-</body> <!-- 78 -->
-</html> <!-- 79 -->
+      // Mouse interaction setup
+      const mouse = new THREE.Vector2(0, 0);
+      const mouseWorld = new THREE.Vector3(0, 0, 0);
+
+      // Mouse move handler
+      document.addEventListener('mousemove', (event) => {
+        // Convert screen coordinates to normalized device coordinates (-1 to +1)
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Convert to world coordinates
+        mouseWorld.set(mouse.x, mouse.y, 0.5);
+        mouseWorld.unproject(camera);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Mouse interaction - particles are attracted to mouse
+        const mouseInfluence = 0.02;
+        particles.rotation.x += (mouse.y * mouseInfluence + 0.001);
+        particles.rotation.y += (mouse.x * mouseInfluence + 0.002);
+        particles.rotation.z += 0.0005;
+
+        // Add subtle mouse-following movement
+        particles.position.x += (mouseWorld.x - particles.position.x) * 0.01;
+        particles.position.y += (mouseWorld.y - particles.position.y) * 0.01;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+  </script>
+</body>
+</html>
