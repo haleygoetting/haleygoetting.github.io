@@ -72,6 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (container) {
         container.appendChild(this.renderer.domElement);
         console.log('Renderer canvas added to container');
+
+        // Hide fallback message once particles are initialized
+        const fallback = container.querySelector('.particle-fallback');
+        if (fallback) {
+          fallback.style.display = 'none';
+        }
       } else {
         console.error('Particle container not found!');
       }
@@ -254,9 +260,26 @@ document.addEventListener('DOMContentLoaded', function() {
   // Check if Three.js is loaded
   if (typeof THREE === 'undefined') {
     console.error('Three.js not loaded!');
+    showFallbackError('Three.js failed to load. Please check your internet connection.');
     return;
   }
 
-  // Initialize the particle system
-  new CymaticsParticles();
+  try {
+    // Initialize the particle system
+    new CymaticsParticles();
+  } catch (error) {
+    console.error('Failed to initialize particle system:', error);
+    showFallbackError('Particle system failed to initialize. Try refreshing the page.');
+  }
+
+  function showFallbackError(message) {
+    const container = document.getElementById('particle-container');
+    if (container) {
+      const fallback = container.querySelector('.particle-fallback');
+      if (fallback) {
+        fallback.innerHTML = message;
+        fallback.style.color = 'rgba(255, 100, 100, 0.6)';
+      }
+    }
+  }
 });
