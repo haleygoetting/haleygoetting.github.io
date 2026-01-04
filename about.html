@@ -5,49 +5,69 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>About — Haley Goetting</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Navigation styling to match current design */
+    .site-nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 200;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: #ffffff;
+      background: rgba(138,124,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav a {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="site-title">Haley Goetting</h1>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="works.html">Works</a>
+        <a href="art-conservation.html">Art Conservation</a>
+        <a href="research.html">Research</a>
+        <a href="b-side.html">B-Side</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <h1 class="site-title">Haley Goetting</h1>
-    <nav class="site-nav">
-      <a href="index.html">Home</a>
-      <a href="works.html">Works</a>
-      <a href="art-conservation.html">Art Conservation</a>
-      <a href="research.html">Research</a>
-      <a href="b-side.html">B-Side</a>
-      <a href="about.html">About</a>
-    </nav>
-  </div>
-</header>
+  <main class="container">
+    <section class="project-page">
+      <h2>About Me</h2>
 
-<main class="container">
-  <section class="project-page">
-    <h2>About</h2>
-    <p>
-      I’m an undergraduate scientist, researcher, and artist working primarily
-      in watercolor and mixed media. My work is influenced by quiet urban spaces,
-      vintage materials, and observation.
-    </p>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <p>© <span id="year"></span> Haley Goetting</p>
-  </div>
-</footer>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Haley Goetting</p>
+    </div>
+  </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<div id="lightbox" class="lightbox">
-  <span class="close-button">&times;</span>
-  <img class="lightbox-content" id="lightbox-img">
-  <div id="lightbox-caption"></div>
-</div>
-
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
