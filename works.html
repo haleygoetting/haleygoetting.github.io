@@ -13,7 +13,7 @@
       min-height: 80vh;
       align-items: flex-start;
       gap: 4rem;
-      padding: 4rem 32px 4rem 0;
+      padding: 4rem 32px 4rem 32px;
       max-width: 2000px;
       margin: 0 auto;
     }
@@ -25,19 +25,20 @@
       align-items: flex-start;
       padding-top: 2rem;
       min-height: 300px;
-      margin-left: -32px;
-      padding-left: 32px;
+      position: relative;
     }
 
     .star-image {
+      position: absolute;
+      left: -32px;
+      top: -4rem;
       width: auto;
       height: auto;
-      max-width: 40vw;
-      max-height: 60vh;
+      max-width: 60vw;
+      max-height: 90vh;
       opacity: 0.8;
       object-fit: contain;
-      align-self: flex-start;
-      margin-left: -32px;
+      z-index: 1;
     }
 
     .works-right {
@@ -121,8 +122,9 @@
       }
 
       .star-image {
-        max-width: 60%;
+        max-width: 90%;
         align-self: center;
+        margin-left: 0;
       }
     }
   </style>
