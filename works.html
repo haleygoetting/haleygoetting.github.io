@@ -18,12 +18,17 @@
     .works-left {
       flex: 1;
       position: relative;
+      padding-top: 2rem;
     }
 
     .star-image {
-      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: auto;
       height: auto;
-      max-width: 80%;
+      max-width: 40vw;
+      max-height: 60vh;
       opacity: 0.8;
       object-fit: contain;
     }
@@ -109,7 +114,9 @@
       }
 
       .star-image {
+        position: static;
         max-width: 60%;
+        margin: 0 auto;
       }
     }
   </style>
