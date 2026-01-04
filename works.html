@@ -5,6 +5,114 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Works — Haley Goetting</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Works page custom layout */
+    .works-hero {
+      display: flex;
+      min-height: 80vh;
+      align-items: flex-start;
+      gap: 4rem;
+      padding: 4rem 0;
+    }
+
+    .works-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .star-image {
+      max-width: 80%;
+      height: auto;
+      opacity: 0.8;
+    }
+
+    .works-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+
+    .works-title {
+      font-size: 4rem;
+      font-weight: 300;
+      color: #333;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .works-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .works-nav a {
+      display: block;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      font-size: 1.4rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .works-nav a:hover {
+      background: rgba(138, 124, 255, 0.1);
+      border-color: #8a7cff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(138, 124, 255, 0.3);
+    }
+
+    /* Hide the old gallery */
+    .gallery {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .works-hero {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 0;
+        min-height: auto;
+      }
+
+      .works-left {
+        order: 2;
+      }
+
+      .works-right {
+        order: 1;
+        align-items: center;
+      }
+
+      .works-title {
+        font-size: 3rem;
+        text-align: center;
+      }
+
+      .works-nav {
+        gap: 1rem;
+      }
+
+      .works-nav a {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .star-image {
+        max-width: 60%;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -22,22 +130,19 @@
   </header>
 
   <main class="container">
-    <section class="project-page">
-      <h2>My Works</h2>
+    <section class="works-hero">
+      <div class="works-left">
+        <img src="images/startransparent.jpg" alt="Star transparent artwork" class="star-image">
+      </div>
 
-      <div class="gallery">
-        <a href="works/watercolor.html" class="gallery-item">
-          <img src="images/andtheblackholesingstheblues.jpg" alt="Watercolor paintings by Haley Goetting">
-        </a>
+      <div class="works-right">
+        <h1 class="works-title">Art Works</h1>
 
-        <a href="works/sketches.html" class="gallery-item">
-          <img src="images/madridsketchs.JPG" alt="Pen, pencil, and charcoal drawings by Haley Goetting">
-        </a>
-
-        <a href="works/prints.html" class="gallery-item">
-          <img src="images/flowerprint.JPG" alt="Jewelry by Haley Goetting">
-        </a>
-
+        <nav class="works-nav">
+          <a href="works/watercolor.html">Watercolor</a>
+          <a href="works/sketches.html">Pen, Pencil, Charcoal</a>
+          <a href="works/prints.html">Jewelry</a>
+        </nav>
       </div>
     </section>
   </main>
