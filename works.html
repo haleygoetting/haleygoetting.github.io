@@ -8,11 +8,14 @@
   <style>
     /* Works page custom layout */
     .works-hero {
+      position: relative;
       display: flex;
       min-height: 80vh;
       align-items: flex-start;
       gap: 4rem;
-      padding: 4rem 0;
+      padding: 4rem 32px 4rem 0;
+      max-width: 2000px;
+      margin: 0 auto;
     }
 
     .works-left {
@@ -22,6 +25,8 @@
       align-items: flex-start;
       padding-top: 2rem;
       min-height: 300px;
+      margin-left: -32px;
+      padding-left: 32px;
     }
 
     .star-image {
@@ -32,7 +37,7 @@
       opacity: 0.8;
       object-fit: contain;
       align-self: flex-start;
-      justify-self: flex-start;
+      margin-left: -32px;
     }
 
     .works-right {
@@ -137,8 +142,8 @@
     </div>
   </header>
 
-  <main class="container">
-    <section class="works-hero">
+  <main>
+    <section class="works-hero container-custom">
       <div class="works-left">
         <img src="images/startransparent.png" alt="Star transparent artwork" class="star-image">
       </div>
