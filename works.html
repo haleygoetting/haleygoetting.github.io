@@ -66,23 +66,27 @@
 
     .works-nav a {
       display: block;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px solid #ddd;
-      border-radius: 8px;
       text-decoration: none;
-      color: #333;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 200;
       font-size: 1.4rem;
-      font-weight: 400;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
       transition: all 0.3s ease;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 1px;
+      white-space: nowrap;
       text-align: center;
     }
 
     .works-nav a:hover {
-      background: rgba(138, 124, 255, 0.1);
-      border-color: #8a7cff;
+      color: #ffffff;
+      background: rgba(138,124,255,0.3);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(138, 124, 255, 0.3);
+      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
     }
 
     /* Hide the old gallery */
@@ -117,7 +121,7 @@
       }
 
       .works-nav a {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding: 0.8rem 1.5rem;
       }
 
