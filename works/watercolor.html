@@ -22,16 +22,20 @@
     }
 
     .hero-left h2 {
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
       font-size: 3.5rem;
-      font-weight: 300;
+      font-weight: 100;
       margin-bottom: 1.5rem;
-      color: #333;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 6px;
+      transform: scaleY(1.6);
+      transform-origin: center;
     }
 
     .hero-left p {
       font-size: 1.2rem;
       line-height: 1.6;
-      color: #666;
+      color: rgba(255, 255, 255, 0.8);
       margin: 0;
     }
 
@@ -72,7 +76,17 @@
 
       .hero-left h2 {
         font-size: 2.5rem;
+        letter-spacing: 2px;
+        transform: scaleY(1.3);
       }
+
+    @media (max-width: 480px) {
+      .hero-left h2 {
+        font-size: 2rem;
+        letter-spacing: 1px;
+        transform: scaleY(1.2);
+      }
+    }
 
       .hero-right {
         order: 0;
@@ -109,7 +123,7 @@
 
   <section class="hero container">
     <div class="hero-left">
-      <h2>Watercolor Series</h2>
+      <h2>Watercolor</h2>
       <p>Short description of this project and medium.</p>
     </div>
     <div class="hero-right">
