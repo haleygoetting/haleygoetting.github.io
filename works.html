@@ -17,12 +17,14 @@
 
     .works-left {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
     }
 
     .star-image {
+      position: absolute;
+      left: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
       max-width: 80%;
       height: auto;
       opacity: 0.8;
