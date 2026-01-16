@@ -92,8 +92,8 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 .gallery {
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  margin-top: 80px;}
+  gap: 24px;
+  margin-top: 24px;}
 
 .gallery-item {
   text-decoration: none;
@@ -168,8 +168,8 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  margin-bottom: 96px;}
+  gap: 16px;
+  margin-bottom: 48px;}
 
 /* 3 columns on medium screens */
 @media (min-width: 900px) {
@@ -184,12 +184,8 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
 .gallery-item {
   text-decoration: none;
   color: inherit;
-  background: rgba(10,10,10,0.6);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.1);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .gallery-item img {
@@ -214,9 +210,7 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
   font-size: 0.85rem;
 }
 .gallery-item:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(138,124,255,0.3);
+  transform: translateY(-3px);
 }
 .gallery-item:hover img {
   opacity: 0.95;
