@@ -181,6 +181,13 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
   .gallery {
     grid-template-columns: repeat(4, 1fr);}}
 
+/* Full width gallery on very large screens */
+@media (min-width: 1400px) {
+  .container {
+    max-width: none;
+    padding-left: 64px;
+    padding-right: 64px;}}
+
 .gallery-item {
   text-decoration: none;
   color: inherit;
