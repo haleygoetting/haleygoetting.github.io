@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Works — Haley Goetting?v=4</title>
+  <title>Works — Haley Goetting</title>
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -11,34 +11,34 @@
     .works-hero {
       position: relative;
       display: flex;
+      min-height: 80vh;
       align-items: flex-start;
       gap: 4rem;
-      min-height: 80vh;
-      margin-top: 2rem;
+      padding: 4rem 32px 4rem 32px;
+      max-width: 2000px;
+      margin: 0 auto;
     }
 
-    .star-container {
-      position: absolute;
-      left: -32px;
-      top: 0;
-      z-index: 1;
+    .works-left {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 2rem;
+      min-height: 300px;
+      position: relative;
     }
 
     .star-image {
+      position: absolute;
+      left: -32px;
+      top: -4rem;
       width: 65vw;
       height: auto;
       max-height: 100vh;
       opacity: 0.8;
       object-fit: contain;
-    }
-
-    .content-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3rem;
-      text-align: center;
+      z-index: 1;
     }
 
     .works-right {
@@ -106,18 +106,18 @@
         min-height: auto;
       }
 
-      .star-container {
-        position: static;
+      .works-left {
         order: 2;
-        margin-top: 2rem;
       }
 
-      .content-container {
+      .works-right {
         order: 1;
+        align-items: center;
       }
 
       .works-title {
         font-size: 3rem;
+        text-align: center;
       }
 
       .works-nav {
@@ -130,8 +130,9 @@
       }
 
       .star-image {
-        width: 100%;
         max-width: 100%;
+        align-self: center;
+        margin-left: 0;
       }
     }
   </style>
@@ -151,13 +152,13 @@
     </div>
   </header>
 
-  <main class="container">
-    <section class="works-hero">
-      <div class="star-container">
+  <main>
+    <section class="works-hero container">
+      <div class="works-left">
         <img src="images/watercolor/startransparent.png" alt="Star transparent artwork" class="star-image">
       </div>
 
-      <div class="content-container">
+      <div class="works-right">
         <h1 class="works-title">Art Works</h1>
 
         <nav class="works-nav">
