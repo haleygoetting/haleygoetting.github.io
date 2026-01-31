@@ -36,6 +36,172 @@
         padding: 8px 14px;
       }
     }
+
+    /* B-Side page specific styles */
+    .b-side-header-section {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: flex-start;
+      flex-direction: row-reverse;
+    }
+
+    .b-side-event-image {
+      flex: 0 0 40%;
+      min-width: 300px;
+    }
+
+    .b-side-event-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .b-side-description {
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ffffff;
+    }
+
+    .b-side-description p {
+      margin-bottom: 1.5rem;
+    }
+
+    .b-side-section {
+      margin-bottom: 4rem;
+    }
+
+    .b-side-section h3 {
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+
+    /* B-Side page heading */
+    .project-page h2 {
+      color: #ffffff;
+    }
+
+    /* Carousel styles */
+    .carousel-container {
+      position: relative;
+      margin-bottom: 4rem;
+    }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item {
+      flex: 0 0 calc(25% - 12px);
+      min-width: 200px;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(138, 124, 255, 0.7);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 8px;
+      z-index: 10;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-button:hover {
+      background: rgba(138, 124, 255, 1);
+    }
+
+    .carousel-button.prev {
+      left: 10px;
+    }
+
+    .carousel-button.next {
+      right: 10px;
+    }
+
+    @media (max-width: 1200px) {
+      .carousel-item {
+        flex: 0 0 calc(33.333% - 11px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .carousel-item {
+        flex: 0 0 calc(50% - 8px);
+      }
+
+      .carousel-button {
+        padding: 8px 12px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel-item {
+        flex: 0 0 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .b-side-header-section {
+        flex-direction: column;
+      }
+
+      .b-side-event-image {
+        flex: 1;
+      }
+
+      .b-side-description {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* B-Side link section above footer */
+    .b-side-link-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .b-side-link-section a {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--accent);
+    }
+
+    .b-side-link-section a:hover {
+      transform: scale(1.15);
+      background: rgba(138, 124, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(138, 124, 255, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -54,124 +220,126 @@
   <main class="container">
     <section class="project-page">
       <h2>B-Side</h2>
-
-      <div class="gallery">
-        <div class="gallery-item">
-          <img src="images/B-Side/Events.jpg" alt="B-Side Events by Haley Goetting">
-        </div>
-        <div class="gallery-item">
+      
+      <!-- Header Section with Description and Event Image -->
+      <div class="b-side-header-section">
+        <div class="b-side-event-image">
           <img src="images/B-Side/Events.png" alt="B-Side Events by Haley Goetting">
         </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/header.png" alt="B-Side header by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Light1.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/light2.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Light3.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/light4.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/light5.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/light6.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/light7.png" alt="B-Side Light work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/MM1.jpeg" alt="B-Side work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/MM2.jpeg" alt="B-Side work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/MM3.JPG" alt="B-Side work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2026-01-15 at 4.47.50 PM.png" alt="B-Side work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2026-01-15 at 4.51.15 PM.png" alt="B-Side work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2026-01-15 at 5.05.00 PM.png" alt="B-Side work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/sumi.jpeg" alt="B-Side sumi work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/sumi1.jpg" alt="B-Side sumi work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/sumi2.jpg" alt="B-Side sumi work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/sumi3.jpeg" alt="B-Side sumi work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/sumi3.png" alt="B-Side sumi work by Haley Goetting">
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/colorfulsumi copy.jpg">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-29 at 1.06.50 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-29 at 1.13.00 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-29 at 1.15.12 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-29 at 12.50.08 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-29 at 12.51.12 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-30 at 9.30.47 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-30 at 9.31.22 AM copy.png" >
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-04-30 at 9.31.52 AM copy.png">
-          <div class="gallery-caption">
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="images/B-Side/Screenshot 2025-12-25 at 9.11.06 PM.png">
-          <div class="gallery-caption">
-          </div>
+        <div class="b-side-description">
+          <p>Our mission at the B-Side Arts collective is to create accessible, inclusive spaces in visual and performing arts for those from underrepresented backgrounds. We offer creative educational workshops and programs, and seek to build a community that invites students to create, imagine, and explore together.</p>
+          <p>Since my engagement with B-side over the last four years, and as Co-Chair, I've helped rebuild the community that had dissolved during the pandemic, leading workshops, and organizing various community events. B-side has become an indispensible pillar of support and inspiration in my life.</p>
         </div>
       </div>
+
+      <!-- Makers Markets Section -->
+      <section class="b-side-section">
+        <h3>Makers Markets</h3>
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="images/B-Side/MM.png" alt="B-Side Makers Market by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/MM1.jpeg" alt="B-Side Makers Market by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/MM2.jpeg" alt="B-Side Makers Market by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/MM3.JPG" alt="B-Side Makers Market by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/MM4.png" alt="B-Side Makers Market by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/MM5.png" alt="B-Side Makers Market by Haley Goetting">
+          </div>
+        </div>
+      </section>
+
+      <!-- Summinagashi Workshop Section -->
+      <section class="b-side-section">
+        <h3>Suminagashi Japanese paper marbling workshop</h3>
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="images/B-Side/sumi1.jpg" alt="B-Side Summinagashi by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/sumi2.jpg" alt="B-Side Summinagashi by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/sumi3.jpeg" alt="B-Side Summinagashi by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/sumi4.png" alt="B-Side Summinagashi by Haley Goetting">
+          </div>
+        </div>
+      </section>
+
+      <!-- Liquid Light Show Section -->
+      <section class="b-side-section">
+        <h3>Liquid Light Show: performance art in collaboration with Colorado College's sustainable fashion show</h3>
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="images/B-Side/Lightedited.pdf" alt="B-Side Liquid Light Show by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/light2.png" alt="B-Side Liquid Light Show by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/Lightedited2.pdf" alt="B-Side Liquid Light Show by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/light4.png" alt="B-Side Liquid Light Show by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/light7.png" alt="B-Side Liquid Light Show by Haley Goetting">
+          </div>
+          <div class="gallery-item">
+            <img src="images/B-Side/Light8.png" alt="B-Side Liquid Light Show by Haley Goetting">
+          </div>
+        </div>
+      </section>
+
+      <!-- Browse More Event Gallery Section -->
+      <section class="b-side-section">
+        <h3>Browse more event gallery images</h3>
+        <div class="carousel-container">
+          <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-item">
+                <img src="images/B-Side/Extra.jpg" alt="B-Side Extra">
+              </div>
+              <div class="carousel-item">
+                <img src="images/B-Side/Extra1.png" alt="B-Side Extra">
+              </div>
+              <div class="carousel-item">
+                <img src="images/B-Side/Extra2.png" alt="B-Side Extra">
+              </div>
+              <div class="carousel-item">
+                <img src="images/B-Side/Extra3.png" alt="B-Side Extra">
+              </div>
+              <div class="carousel-item">
+                <img src="images/B-Side/Extra4.png" alt="B-Side Extra">
+              </div>
+              <div class="carousel-item">
+                <img src="images/B-Side/Extra5.png" alt="B-Side Extra">
+              </div>
+              <div class="carousel-item">
+                <img src="images/B-Side/extra image.png" alt="B-Side Extra Image">
+              </div>
+            </div>
+          </div>
+          <button class="carousel-button prev" id="prevBtn">❮</button>
+          <button class="carousel-button next" id="nextBtn">❯</button>
+        </div>
+      </section>
     </section>
   </main>
+
+  <section class="b-side-link-section">
+    <a href="https://bsideartscollective.wixsite.com/bside" target="_blank">For more information, visit our website</a>
+  </section>
 
   <footer class="site-footer">
     <div class="container">
@@ -181,6 +349,49 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Carousel functionality
+    const carouselTrack = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentPosition = 0;
+
+    function getItemWidth() {
+      const item = carouselTrack.querySelector('.carousel-item');
+      return item.offsetWidth + 16; // 16px gap
+    }
+
+    function getMaxScroll() {
+      const totalWidth = carouselTrack.scrollWidth;
+      const visibleWidth = carouselTrack.parentElement.offsetWidth;
+      return Math.max(0, totalWidth - visibleWidth);
+    }
+
+    function updateCarousel() {
+      carouselTrack.style.transform = `translateX(-${currentPosition}px)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      const itemWidth = getItemWidth();
+      currentPosition = Math.max(0, currentPosition - itemWidth);
+      updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const itemWidth = getItemWidth();
+      const maxScroll = getMaxScroll();
+      currentPosition = Math.min(maxScroll, currentPosition + itemWidth);
+      updateCarousel();
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const maxScroll = getMaxScroll();
+      if (currentPosition > maxScroll) {
+        currentPosition = maxScroll;
+        updateCarousel();
+      }
+    });
   </script>
 </body>
 </html>
