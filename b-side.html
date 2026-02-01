@@ -15,9 +15,9 @@
       font-size: 1.1rem;
       padding: 12px 20px;
       border: none;
-      border-radius: 8px;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
       transition: all 0.3s ease;
       font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
       letter-spacing: 1px;
@@ -26,9 +26,7 @@
 
     .site-nav a:hover {
       color: #ffffff;
-      background: rgba(138,124,255,0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
+      border-bottom: 2px solid #ffffff;
     }
 
     @media (max-width: 768px) {
@@ -63,7 +61,10 @@
       flex: 1;
       font-size: 1rem;
       line-height: 1.6;
-      color: #ffffff;
+      color: rgba(255, 255, 255, 0.8);
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      font-weight: 200;
+      letter-spacing: 1px;
     }
 
     .b-side-description p {
@@ -77,12 +78,21 @@
     .b-side-section h3 {
       margin-bottom: 2rem;
       font-size: 1.8rem;
-      font-weight: 400;
+      font-weight: 200;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 1px;
     }
 
     /* B-Side page heading */
     .project-page h2 {
-      color: #ffffff;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 100;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 6px;
+      transform: scaleY(1.6);
+      transform-origin: center;
+      margin-bottom: 2rem;
     }
 
     /* Carousel styles */
@@ -228,8 +238,8 @@
           <img src="images/B-Side/Events.png" alt="B-Side Events by Haley Goetting">
         </div>
         <div class="b-side-description">
-          <p>Our mission at the B-Side Arts collective is to create accessible, inclusive spaces in visual and performing arts for those from underrepresented backgrounds. We offer creative educational workshops and programs, and seek to build a community that invites students to create, imagine, and explore together.</p>
-          <p>Since my engagement with B-side over the last four years, and as Co-Chair, I've helped rebuild the community that had dissolved during the pandemic, leading workshops, and organizing various community events. B-side has become an indispensible pillar of support and inspiration in my life.</p>
+          <p>Our mission at the B-Side Arts collective is to create accessible, inclusive spaces in visual and performing arts for those from underrepresented backgrounds. We offer creative educational workshops and programs and seek to build a community that invites students to create, imagine, and explore together.</p>
+          <p>Since my engagement with B-side over the last four years, and as Co-Chair, I've helped rebuild a community that had dissolved during the pandemic, leading workshops, and organizing various community events. B-side has become an indispensible pillar of support and inspiration in my life.</p>
         </div>
       </div>
 

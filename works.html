@@ -7,6 +7,35 @@
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Navigation styling to match current design */
+    .site-nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 200;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
+      transition: all 0.3s ease;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: #ffffff;
+      border-bottom: 2px solid #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .site-nav a {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+      }
+    }
+
     /* Works page custom layout */
     .works-hero {
       position: relative;
@@ -76,9 +105,9 @@
       font-size: 1.4rem;
       padding: 1rem 2rem;
       border: none;
-      border-radius: 8px;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
       transition: all 0.3s ease;
       font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
       letter-spacing: 1px;
@@ -88,9 +117,7 @@
 
     .works-nav a:hover {
       color: #ffffff;
-      background: rgba(138,124,255,0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
+      border-bottom: 2px solid #ffffff;
     }
 
     /* Hide the old gallery */
@@ -162,8 +189,8 @@
         <nav class="works-nav">
           <a href="works/watercolor.html">Watercolor</a>
           <a href="works/art-journal.html">Art Journal & Sketches</a>
-          <a href="works/sketches.html">Dry Media</a>
-          <a href="works/prints.html">Jewelry</a>
+          <a href="works/dry-media.html">Dry Media</a>
+          <a href="works/jewelry.html">Jewelry</a>
         </nav>
       </div>
     </section>

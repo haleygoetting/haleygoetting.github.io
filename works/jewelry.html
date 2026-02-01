@@ -7,6 +7,34 @@
   <link rel="stylesheet" href="../css/styles.css?v=1767086960">
   <link rel="stylesheet" href="../css/gallery-lightbox.css">
   <style>
+    /* Page heading styling */
+    .project-page h2 {
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 100;
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 6px;
+      transform: scaleY(1.6);
+      transform-origin: center;
+    }
+
+    @media (max-width: 720px) {
+      .project-page h2 {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        transform: scaleY(1.3);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-page h2 {
+        font-size: 2rem;
+        letter-spacing: 1px;
+        transform: scaleY(1.2);
+      }
+    }
+
     /* Navigation styling to match current design */
     .site-nav a {
       text-decoration: none;
@@ -15,9 +43,9 @@
       font-size: 1.1rem;
       padding: 12px 20px;
       border: none;
-      border-radius: 8px;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
       transition: all 0.3s ease;
       font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
       letter-spacing: 1px;
@@ -26,9 +54,7 @@
 
     .site-nav a:hover {
       color: #ffffff;
-      background: rgba(138,124,255,0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
+      border-bottom: 2px solid #ffffff;
     }
 
     @media (max-width: 768px) {
@@ -55,9 +81,25 @@
   <main class="container">
     <section class="project-page">
       <h2>Jewelry</h2>
-      <p>Handcrafted jewelry pieces using found abalone and seaglass.</p>
-
+      <p>Handcrafted jewelry using found abalone and seaglass.</p>
+      
       <div class="gallery">
+        <div class="gallery-item">
+          <img src="../images/jewelry/Jewelry10.jpeg" alt="Jewelry by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/jewelry/Jewelry11.jpeg" alt="Jewelry by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/jewelry/Jewelry7.jpeg" alt="Jewelry by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/jewelry/Jewelry6.jpeg" alt="Jewelry by Haley Goetting">
+        </div>
+
         <div class="gallery-item">
           <img src="../images/jewelry/Jewelry1.jpg" alt="Jewelry by Haley Goetting">
         </div>
@@ -71,35 +113,11 @@
         </div>
 
         <div class="gallery-item">
-          <img src="../images/jewelry/jewelry4.jpeg" alt="Jewelry by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
           <img src="../images/jewelry/Jewelry5.JPG" alt="Jewelry by Haley Goetting">
         </div>
 
         <div class="gallery-item">
-          <img src="../images/jewelry/Jewelry6.jpeg" alt="Jewelry by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/jewelry/Jewelry7.jpeg" alt="Jewelry by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
           <img src="../images/jewelry/Jewelry8.jpeg" alt="Jewelry by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/jewelry/Jewelry9.jpeg" alt="Jewelry by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/jewelry/Jewelry10.jpeg" alt="Jewelry by Haley Goetting">
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/jewelry/Jewelry11.jpeg" alt="Jewelry by Haley Goetting">
         </div>
 
         <div class="gallery-item">

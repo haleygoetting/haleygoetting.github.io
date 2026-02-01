@@ -7,6 +7,35 @@
   <link rel="stylesheet" href="../css/styles.css?v=1767086960">
   <link rel="stylesheet" href="../css/gallery-lightbox.css">
   <style>
+    /* Navigation styling to match current design */
+    .site-nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 200;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
+      transition: all 0.3s ease;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: #ffffff;
+      border-bottom: 2px solid #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .site-nav a {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+      }
+    }
+
     /* Hero section styling - text left, image right */
     .hero {
       margin: 20px auto 20px;
@@ -124,7 +153,7 @@
     .gallery-item[style*="grid-column: span 2"] {
       grid-column: span 2;
     }
-    }
+    
   </style>
 </head>
 <body>
@@ -150,7 +179,7 @@
       <div class="parallax-container">
         <img src="../images/art journal/stamping.jpg" alt="Art journal stamps by Haley Goetting" class="parallax-img">
       </div>
-      <p style="text-align: center; margin-top: 1rem; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">Stamps, Aug 25', Japan</p>
+      <p style="text-align: center; margin-top: 1rem; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">Stamps, Japan, Aug 25'</p>
     </div>
   </section>
 
@@ -161,31 +190,28 @@
         <!-- Row 1: Perfect Day, Stamp 1 -->
         <div class="gallery-item" style="grid-column: span 2;">
           <img src="../images/art journal/perfectday.JPG" alt="Art journal perfect day by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Perfect Day</p>
+          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Jogasaki Coast, Japan, Aug 25'</p>
         </div>
 
         <div class="gallery-item">
           <img src="../images/art journal/stamp1.png" alt="Art journal stamp 1 by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Stamp 1</p>
+          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Floral Stamps, Hida Mountains, Japan, Aug 25'</p>
         </div>
 
         <!-- Section Break -->
         <div style="grid-column: 1 / -1; height: 1rem;"></div>
 
-        <!-- Row 2: Taiwan, Warrior, China -->
-        <div class="gallery-item">
-          <img src="../images/art journal/Taiwan.png" alt="Art journal Taiwan by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Taiwan</p>
-        </div>
+        <!-- Row 2: Taiwan, China (centered using wrapper) -->
+        <div style="grid-column: 1 / -1; display: flex; justify-content: center; gap: 2rem;">
+          <div class="gallery-item">
+            <img src="../images/art journal/Taiwan.png" alt="Art journal Taiwan by Haley Goetting">
+            <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Kaohsiung, Taiwan. May 2024</p>
+          </div>
 
-        <div class="gallery-item">
-          <img src="../images/art journal/Warrior.png" alt="Art journal Warrior by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Warrior</p>
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/art journal/china.jpg" alt="Art journal china by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">China</p>
+          <div class="gallery-item">
+            <img src="../images/art journal/china.jpg" alt="Art journal china by Haley Goetting">
+            <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Qibao, Shanghai, China. Apr 2024 </p>
+          </div>
         </div>
 
         <!-- Section Break -->
@@ -194,42 +220,22 @@
         <!-- Row 3: Madrid1, Madrid2, Granada Cathedral -->
         <div class="gallery-item">
           <img src="../images/art journal/Madrid1.png" alt="Art journal Madrid sketch 1 by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Madrid Sketch 1</p>
+          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Madrid Sketch, Oct 2025</p>
         </div>
 
         <div class="gallery-item">
           <img src="../images/art journal/Madrid2.png" alt="Art journal Madrid sketch 2 by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Madrid Sketch 2</p>
+          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Madrid Sketch Oct 2025</p>
         </div>
 
         <div class="gallery-item">
           <img src="../images/art journal/granada cathedral.JPG" alt="Art journal Granada Cathedral by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Granada Cathedral</p>
+          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Granada Cathedral, Oct 2025</p>
         </div>
 
         <!-- Section Break -->
         <div style="grid-column: 1 / -1; height: 1rem;"></div>
 
-        <!-- Row 4: Everything else -->
-        <div class="gallery-item" style="grid-column: span 2;">
-          <img src="../images/art journal/claud.png" alt="Art journal claud by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Claud</p>
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/art journal/drawing6.jpeg" alt="Art journal drawing 6 by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Drawing 6</p>
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/art journal/drawing8.png" alt="Art journal drawing 8 by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Drawing 8</p>
-        </div>
-
-        <div class="gallery-item">
-          <img src="../images/art journal/skate.png" alt="Art journal skate by Haley Goetting">
-          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Skate</p>
-        </div>
 
       </div>
     </section>
