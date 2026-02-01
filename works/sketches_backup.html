@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dry Media — Haley Goetting</title>
+  <link rel="stylesheet" href="../css/styles.css?v=1767086960">
+  <style>
+    /* Navigation styling to match current design */
+    .site-nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 200;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      font-family: 'Didot', 'Times New Roman', 'Garamond', serif;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: #ffffff;
+      background: rgba(138,124,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(138,124,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav a {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="site-title">Haley Goetting</h1>
+      <nav class="site-nav">
+        <a href="../">Home</a>
+        <a href="../works.html">Works</a>
+        <a href="../b-side.html">B-Side</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="project-page">
+      <h2>Dry Media</h2>
+      
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing1.jpeg" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing2.jpeg" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing3.jpeg" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing4.jpeg" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing5.jpeg" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing6.jpeg" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing7.png" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/drawing8.png" alt="Pen and pencil drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/eschercore.png" alt="Escher core drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/Screenshot 2026-01-15 at 4.48.45 PM.png" alt="Drawing by Haley Goetting">
+        </div>
+
+        <div class="gallery-item">
+          <img src="../images/drawing/tomatoes.png" alt="Tomatoes drawing by Haley Goetting">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Haley Goetting</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
